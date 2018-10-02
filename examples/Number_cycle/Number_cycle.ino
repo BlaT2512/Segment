@@ -1,5 +1,5 @@
-#include <sevenSeg.h>   // Include the sevenSeg library
-sevenSeg sevseg(5, 6, 7, 8, 9, 10, 11);   // Set the pins you want (segment a - segment g)
+#include <singleSevSeg.h>   // Include the singleSevSeg library
+singleSevSeg sevseg(5, 6, 7, 8, 9, 10, 11);   // Set the pins you want (segment a - segment g)
 
 int delayTime = 1000   // Milliseconds to delay after each number (default 1 second)
 
