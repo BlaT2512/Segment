@@ -1,14 +1,14 @@
 /*
-   sevenSeg.cpp - Library for using a single 7 segment display
+   singleSevSeg.cpp - Library for using a single 7 segment display
    7 segment display must be wired up to 7 pins on the arduino
    Created by Blake Tourneur, October 2, 2018.
    Released into the public domain
 */
 
 #include "Arduino.h"
-#include "sevenSeg.h"
+#include "singleSevSeg.h"
 
-sevenSeg::sevenSeg(int sega, int segb, int segc, int segd, int sege, int segf, int segg)
+singleSevSeg::singleSevSeg(int sega, int segb, int segc, int segd, int sege, int segf, int segg)
 {
   pinMode(sega, OUTPUT);
   pinMode(segb, OUTPUT);
@@ -26,7 +26,7 @@ sevenSeg::sevenSeg(int sega, int segb, int segc, int segd, int sege, int segf, i
   _segg = segg;
 }
 
-void sevenSeg::ZERO()
+void singleSevSeg::ZERO()
 {
   digitalWrite(_sega, HIGH);
   digitalWrite(_segb, HIGH);
@@ -37,7 +37,7 @@ void sevenSeg::ZERO()
   digitalWrite(_segg, LOW);
 }
 
-void sevenSeg::ONE()
+void singleSevSeg::ONE()
 {
   digitalWrite(_sega, LOW);
   digitalWrite(_segb, HIGH);
@@ -48,7 +48,7 @@ void sevenSeg::ONE()
   digitalWrite(_segg, LOW);
 }
 
-void sevenSeg::TWO()
+void singleSevSeg::TWO()
 {
   digitalWrite(_sega, HIGH);
   digitalWrite(_segb, HIGH);
@@ -59,7 +59,7 @@ void sevenSeg::TWO()
   digitalWrite(_segg, HIGH);
 }
 
-void sevenSeg::THREE()
+void singleSevSeg::THREE()
 {
   digitalWrite(_sega, HIGH);
   digitalWrite(_segb, HIGH);
@@ -70,7 +70,7 @@ void sevenSeg::THREE()
   digitalWrite(_segg, HIGH);
 }
 
-void sevenSeg::FOUR()
+void singleSevSeg::FOUR()
 {
   digitalWrite(_sega, LOW);
   digitalWrite(_segb, HIGH);
@@ -81,7 +81,7 @@ void sevenSeg::FOUR()
   digitalWrite(_segg, HIGH);
 }
 
-void sevenSeg::FIVE()
+void singleSevSeg::FIVE()
 {
   digitalWrite(_sega, HIGH);
   digitalWrite(_segb, LOW);
@@ -92,7 +92,7 @@ void sevenSeg::FIVE()
   digitalWrite(_segg, HIGH);
 }
 
-void sevenSeg::SIX()
+void singleSevSeg::SIX()
 {
   digitalWrite(_sega, HIGH);
   digitalWrite(_segb, LOW);
@@ -103,7 +103,7 @@ void sevenSeg::SIX()
   digitalWrite(_segg, HIGH);
 }
 
-void sevenSeg::SEVEN()
+void singleSevSeg::SEVEN()
 {
   digitalWrite(_sega, HIGH);
   digitalWrite(_segb, HIGH);
@@ -114,7 +114,7 @@ void sevenSeg::SEVEN()
   digitalWrite(_segg, LOW);
 }
 
-void sevenSeg::EIGHT()
+void singleSevSeg::EIGHT()
 {
   digitalWrite(_sega, HIGH);
   digitalWrite(_segb, HIGH);
@@ -125,7 +125,7 @@ void sevenSeg::EIGHT()
   digitalWrite(_segg, HIGH);
 }
 
-void sevenSeg::NINE()
+void singleSevSeg::NINE()
 {
   digitalWrite(_sega, HIGH);
   digitalWrite(_segb, HIGH);
@@ -136,7 +136,7 @@ void sevenSeg::NINE()
   digitalWrite(_segg, HIGH);
 }
 
-void sevenSeg::CLEAR()
+void singleSevSeg::CLEAR()
 {
   digitalWrite(_sega, LOW);
   digitalWrite(_segb, LOW);
