@@ -1,19 +1,19 @@
 /*
-   sevenSeg.h - Library for using a single 7 segment display
+   singleSevSeg.h - Library for using a single 7 segment display
    7 segment display must be wired up to 7 pins on the arduino
    Created by Blake Tourneur, October 2, 2018.
    Released into the public domain
 */
 
-#ifndef sevenSeg_h
-#define sevenSeg_h
+#ifndef singleSevSeg_h
+#define singleSevSeg_h
 
 #include "Arduino.h"
 
-class sevenSeg
+class singleSevSeg
 {
   public:
-    sevenSeg(int sega, int segb, int segc, int segd, int sege, int segf, int segg);
+    singleSevSeg(int sega, int segb, int segc, int segd, int sege, int segf, int segg);
     void ONE();
     void TWO();
     void THREE();
