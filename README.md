@@ -34,5 +34,8 @@ In the next update, letters will be also supported.
 ### Examples
 To view an example of cycling through the different numbers (`Number_Cycle.ino`), go to `File > Examples > singleSevSeg > Number_Cycle`.
 
+# Updates
+A new major update is coming out soon! It will support the letters of the alphabet that can be made on a seven-seg display, and also support shift registers. The name of the library may also be changing.
+
 # License
 This library is licensed under the `Apache 2.0` license. For more information, [click here](https://www.apache.org/licenses/LICENSE-2.0).
