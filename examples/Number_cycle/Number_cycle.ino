@@ -10,7 +10,7 @@ void setup() {
 void loop() {
   //Cycle from 0-9, then blank
   sevseg.ZERO();
-  delay(delayTime);   // Delay for the delay time sepcified in the integer delayTime
+  delay(delayTime);   // Delay for the delay time specified in the integer delayTime
   sevseg.ONE();
   delay(delayTime);
   sevseg.TWO();
