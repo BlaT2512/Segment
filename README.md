@@ -33,7 +33,10 @@ And to clear the display, use `sevseg.display('~')`
 In the next update, some special characters will also be supported.
 
 ### Examples
-To view an example of cycling through the different numbers (`Number_Cycle.ino`), go to `File > Examples > sevenSegment > Number_Cycle`.
+The examples available for this library are:
+`Number_Cycle.ino` - Cycles through the numbers 0-9 and then blank. Go to `File > Examples > sevenSegment > Number_Cycle`.
+`Letter_Cycle.ino` - Cycles through the letters A-Z and then blank. Go to `File > Examples > sevenSegment > Letter_Cycle`.
+`Serial_Input.ino` - Prints the character on the seven-segment display recieved by the serial. Go to `File > Examples > sevenSegment > Serial_Input`.
 
 # Updates
 A new update is coming out soon! It will support seven segment displays with a decimal point and special characters.
