@@ -9,6 +9,7 @@ To install sevenSegment, install it using the Arduino library manager, or manual
 # Using the library / syntax
 ### Declare the library
 You can either declare the library for use with straight wiring or with a shift register.
+
 STRAIGHT WIRING:
 ```
 #include <sevenSegment.h>   // Include the sevenSegment library
@@ -34,8 +35,11 @@ In the next update, some special characters will also be supported.
 
 ### Examples
 The examples available for this library are:
+
 `Number_Cycle.ino` - Cycles through the numbers 0-9 and then blank. Go to `File > Examples > sevenSegment > Number_Cycle`.
+
 `Letter_Cycle.ino` - Cycles through the letters A-Z and then blank. Go to `File > Examples > sevenSegment > Letter_Cycle`.
+
 `Serial_Input.ino` - Prints the character on the seven-segment display recieved by the serial. Go to `File > Examples > sevenSegment > Serial_Input`.
 
 # Updates
