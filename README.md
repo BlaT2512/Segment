@@ -8,34 +8,35 @@ To install sevenSegment, install it using the Arduino library manager, or manual
 
 # Using the library / syntax
 ### Declare the library
-At the top of your sketch, declare the library like this:
+You can either declare the library for use with straight wiring or with a shift register.
+STRAIGHT WIRING:
 ```
 #include <sevenSegment.h>   // Include the sevenSegment library
-singleSevSeg sevseg(5, 6, 7, 8, 9, 10, 11);   // Set the pins you want (segment a - segment g)
+sevenSegment sevseg(5, 6, 7, 8, 9, 10, 11);   // Set the pins you want (segment a - segment g)
+```
+SHIFT REGISTER WIRING:
+```
+#include <sevenSegment.h>   // Include the sevenSegment library
+sevenSegment sevseg(5, 6, 7);   // Set the pins you want (Data, Clock, Latch)
 ```
 
 ### Commands
-You can currently print to your seven segment display the numbers 0-9:
+You can currently print to your seven segment display the numbers 0-9 and the letters A-Z.
+Here are some examples:
 ```
-  sevseg.ZERO();
-  sevseg.ONE();
-  sevseg.TWO();
-  sevseg.THREE();
-  sevseg.FOUR();
-  sevseg.FIVE();
-  sevseg.SIX();
-  sevseg.SEVEN();
-  sevseg.EIGHT();
-  sevseg.NINE();
-  ```
-And to clear the display, use `sevseg.CLEAR();`
-In the next update, letters will be also supported.
+  sevseg.display('A'); // Display letter A
+  sevseg.display('6'); // Display number 6
+  sevseg.display('G'); // Display letter G
+  sevseg.display('3'); // Display number 3
+```
+And to clear the display, use `sevseg.display('~')`
+In the next update, some special characters will also be supported.
 
 ### Examples
-To view an example of cycling through the different numbers (`Number_Cycle.ino`), go to `File > Examples > singleSevSeg > Number_Cycle`.
+To view an example of cycling through the different numbers (`Number_Cycle.ino`), go to `File > Examples > sevenSegment > Number_Cycle`.
 
 # Updates
-A new major update is coming out soon! It will support the letters of the alphabet that can be made on a seven-seg display, and also support shift registers. The name of the library may also be changing.
+A new update is coming out soon! It will support seven segment displays with a decimal point and special characters.
 
 # License
 This library is licensed under the `Apache 2.0` license. For more information, [click here](https://www.apache.org/licenses/LICENSE-2.0).
