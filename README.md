@@ -43,7 +43,8 @@ The examples available for this library are:
 `Serial_Input.ino` - Prints the character on the seven-segment display recieved by the serial. Go to `File > Examples > sevenSegment > Serial_Input`.
 
 # Updates
-A new update is coming out soon! It will support seven segment displays with a decimal point and special characters.
+A new update is coming out soon! It will support seven segment displays with a decimal point and special characters. Updates can be done through the Arduino Library Manager, or by downloading the latest package from [releases page](https://github.com/Blake-Tourneur/sevenSegment/releases).
+
 
 # License
 This library is licensed under the `Apache 2.0` license. For more information, [click here](https://www.apache.org/licenses/LICENSE-2.0).
