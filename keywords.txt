@@ -1,2 +1,2 @@
-sevenSegment	KEYWORD1
-display	KEYWORD2
+sevenSegment    KEYWORD1
+display KEYWORD2

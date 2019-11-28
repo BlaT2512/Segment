@@ -1,5 +1,5 @@
 # singleSevSeg Library
-Welcome to the singleSevSeg library! This is an Arduino library for a single seven-segment display, wired up to the arduino using 8 wires (sega - segg and GND). Support for displays with a decimal point (dp) will be coming in the next release.
+Welcome to the singleSevSeg library! This is an Arduino library for seven-segment displays, wired up to the arduino using 8 wires (sega - segg) OR with a shift register (clock, latch and data).
 
 <img src="extras/SevSeg.png" alt="drawing" width="200"/>
 
