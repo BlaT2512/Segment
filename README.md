@@ -1,16 +1,16 @@
-# singleSevSeg Library
-Welcome to the singleSevSeg library! This is an Arduino library for seven-segment displays, wired up to the arduino using 8 wires (sega - segg) OR with a shift register (clock, latch and data).
+# sevenSegment Library
+Welcome to the sevenSegment library! This is an Arduino library for seven-segment displays, wired up to the arduino using 8 wires (sega - segg) OR with a shift register (clock, latch and data).
 
 <img src="extras/SevSeg.png" alt="drawing" width="200"/>
 
 # Installation
-To install singleSevSeg, install it using the Arduino library manager, or manually from the [releases page](https://github.com/Blake-Tourneur/singleSevSeg/releases).
+To install sevenSegment, install it using the Arduino library manager, or manually from the [releases page](https://github.com/Blake-Tourneur/sevenSegment/releases).
 
 # Using the library / syntax
 ### Declare the library
 At the top of your sketch, declare the library like this:
 ```
-#include <singleSevSeg.h>   // Include the singleSevSeg library
+#include <sevenSegment.h>   // Include the sevenSegment library
 singleSevSeg sevseg(5, 6, 7, 8, 9, 10, 11);   // Set the pins you want (segment a - segment g)
 ```
 
