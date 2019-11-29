@@ -95,5 +95,5 @@ void sevenSegment::display(char charac)
   else if (_char == 'X' || _char == 'x') _Write(33);
   else if (_char == 'Y' || _char == 'y') _Write(34);
   else if (_char == 'Z' || _char == 'z') _Write(35);
-  else if (_char == '~') _Write(36);
+  else if (_char == '~' || _char == ' ') _Write(36);
 }
