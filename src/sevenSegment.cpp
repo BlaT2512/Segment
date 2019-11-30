@@ -8,8 +8,7 @@
 #include "Arduino.h"
 #include "sevenSegment.h"
 
-sevenSegment::sevenSegment(int sega, int segb, int segc, int segd, int sege, int segf, int segg)
-{
+sevenSegment::sevenSegment(int sega, int segb, int segc, int segd, int sege, int segf, int segg){
   pinMode(sega, OUTPUT);
   pinMode(segb, OUTPUT);
   pinMode(segc, OUTPUT);
@@ -26,8 +25,7 @@ sevenSegment::sevenSegment(int sega, int segb, int segc, int segd, int sege, int
   _segg = segg;
 }
 
-sevenSegment::sevenSegment(int Data, int Clock, int Latch)
-{
+sevenSegment::sevenSegment(int Data, int Clock, int Latch){
   pinMode(Data, OUTPUT);
   pinMode(Clock, OUTPUT);
   pinMode(Latch, OUTPUT);
@@ -56,8 +54,7 @@ void sevenSegment::_Write(int _Numeral){
   _Latching();
 }
 
-void sevenSegment::display(char charac)
-{
+void sevenSegment::display(char charac){
   _char = charac;
   if (_char == '0') _Write(0);
   else if (_char == '1') _Write(1);
@@ -95,5 +92,79 @@ void sevenSegment::display(char charac)
   else if (_char == 'X' || _char == 'x') _Write(33);
   else if (_char == 'Y' || _char == 'y') _Write(34);
   else if (_char == 'Z' || _char == 'z') _Write(35);
-  else if (_char == '~' || _char == ' ') _Write(36);
+  else if (_char == ' ') _Write(36);
+  else if (_char == '"') _Write(37);
+  else if (_char == '#') _Write(38);
+  else if (_char == '$') _Write(39);
+  else if (_char == '%') _Write(40);
+  else if (_char == '&') _Write(41);
+  else if (_char == '\'' || _char == '`') _Write(42);
+  else if (_char == '(' || _char == '[' || _char == '{') _Write(43);
+  else if (_char == ')' || _char == ']' || _char == '}') _Write(44);
+  else if (_char == '*') _Write(45);
+  else if (_char == '+') _Write(46);
+  else if (_char == ',') _Write(47);
+  else if (_char == '-' || _char == '~') _Write(48);
+  else if (_char == '/') _Write(49);
+  else if (_char == ':') _Write(50);
+  else if (_char == ';') _Write(51);
+  else if (_char == '<') _Write(52);
+  else if (_char == '=') _Write(53);
+  else if (_char == '>') _Write(54);
+  else if (_char == '?') _Write(55);
+  else if (_char == '@') _Write(56);
+  else if (_char == '\\') _Write(57);
+  else if (_char == '^') _Write(58);
+  else if (_char == '_') _Write(59);
+}
+
+void sevenSegment::clear(int displays){
+  _displays = displays;
+  for (int i = 1; i <= _displays; i++) {
+    display(' ');
+    delay(10);
+  }
+}
+
+void sevenSegment::displayString(String word, int displays, bool cleardisp){
+  _displays = displays;
+  _word = word;
+  _cleardisp = cleardisp;
+
+  // CLEAR THE DISPLAYS IF NEEDED
+  if (_cleardisp){
+      clear(_displays);
+      delay(100);
+  }
+
+  // DETERMINE WHETHER THE STRING NEEDS TO BE SCROLLED
+  if (_word.length() <= _displays){
+      // STRING DOESN'T NEED TO BE SCROLLED
+      for (int i = 0; i <= _word.length() - 1; i++) {
+        display(_word.charAt(i));
+        delay(10);
+      }
+  }
+  else {
+      // STRING NEEDS TO BE SCROLLED
+      for (int i = 0; i <= _word.length() - 1; i++) {
+        display(_word.charAt(i));
+        delay(1000);
+        //if (Serial.available()) break;
+        
+        if (i >= _word.length() - 1){ // If this is the last character
+          delay(1000);
+          //if (Serial.available()) break;
+          delay(1000);
+          //if (Serial.available()) break;
+          delay(1000);
+          //if (Serial.available()) break;
+          clear();
+          delay(1000);
+          i = -1; // Start the cycle again on -1, as 1 will get added when it starts again making the variable 0
+        }
+        
+        //if (Serial.available()) break;
+      }
+  }
 }

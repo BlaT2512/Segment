@@ -1,3 +1,4 @@
 sevenSegment	KEYWORD1
 display	KEYWORD2
 displayString	KEYWORD2
+clear	KEYWORD2

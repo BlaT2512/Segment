@@ -34,6 +34,6 @@ void loop() {
   delay(delayTime);
   sevseg.display('9');
   delay(delayTime);
-  sevseg.display('~'); // Include clearing the screen in the display cycle
+  sevseg.clear(); // Include clearing one screen in the display cycle (this leaves a gap when it starts again if you have multiple screens)
   delay(delayTime);
 }

@@ -16,6 +16,8 @@ class sevenSegment
     sevenSegment(int sega, int segb, int segc, int segd, int sege, int segf, int segg);
     sevenSegment(int Data, int Clock, int Latch);
     void display(char charac);
+    void clear(int displays = 1);
+    void displayString(String word, int displays = 1, bool cleardisp = true);
   private:
     void _Clocking();
     void _Latching();
@@ -31,8 +33,11 @@ class sevenSegment
     int _Data;
     int _Clock;
     int _Latch;
+    int _displays;
     char _char;
-    int _numMatrix[37][8]{
+    String _word;
+    bool _cleardisp;
+    int _numMatrix[60][8]{
      //segments
      //g,f,e,d,c,b,a,0
       {0,1,1,1,1,1,1,0}, //ZERO
@@ -71,7 +76,30 @@ class sevenSegment
       {1,1,1,0,1,1,0,0}, //LETTER X
       {1,1,0,1,1,1,0,0}, //LETTER Y
       {1,0,0,1,0,1,1,0}, //LETTER Z
-      {0,0,0,0,0,0,0,0}  //BLANK
+      {0,0,0,0,0,0,0,0}, //BLANK
+      {0,1,0,0,0,1,0,0}, //CHARACTER "
+      {0,1,1,0,1,1,0,0}, //CHARACTER #
+      {1,1,0,1,0,0,1,0}, //CHARACTER $
+      {0,1,0,1,1,0,1,0}, //CHARACTER %
+      {1,1,1,1,0,1,1,0}, //CHARACTER &
+      {0,0,0,0,0,1,0,0}, //CHARACTER ' `
+      {0,1,1,1,0,0,1,0}, //CHARACTER ( [ {
+      {0,0,0,1,1,1,1,0}, //CHARACTER ) ] }
+      {1,1,0,0,0,1,1,0}, //CHARACTER *
+      {1,1,1,0,0,0,0,0}, //CHARACTER +
+      {0,0,0,1,1,0,0,0}, //CHARACTER ,
+      {1,0,0,0,0,0,0,0}, //CHARACTER - ~
+      {1,0,0,0,0,1,0,0}, //CHARACTER /
+      {1,0,0,1,0,0,0,0}, //CHARACTER :
+      {1,0,0,1,1,0,0,0}, //CHARACTER ;
+      {1,1,0,0,0,0,1,0}, //CHARACTER <
+      {1,0,0,0,0,0,1,0}, //CHARACTER =
+      {1,0,0,0,0,1,1,0}, //CHARACTER >
+      {1,0,1,0,0,1,1,0}, //CHARACTER ?
+      {1,0,1,1,1,1,1,0}, //CHARACTER @
+      {1,1,0,0,0,0,0,0}, //CHARACTER (back slash)
+      {0,1,0,0,0,1,1,0}, //CHARACTER ^
+      {0,0,0,1,0,0,0,0}  //CHARACTER _
     };
 };
 

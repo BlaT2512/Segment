@@ -42,11 +42,11 @@ void loop() {
         if (Serial.available()) break;
         
         if (i >= incoming.length() - 1){ // If this is the last character
-          delay(1000); // Delay 3 seconds
+          delay(1000); // Delay 1 second
           if (Serial.available()) break;
-          delay(1000); // Delay 3 seconds
+          delay(1000); // Delay 1 second
           if (Serial.available()) break;
-          delay(1000); // Delay 3 seconds
+          delay(1000); // Delay 1 second
           if (Serial.available()) break;
           sevseg.display('~');
           delay(1000);
