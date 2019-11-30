@@ -62,7 +62,9 @@ The examples available for this library are:
 Updates can be done through the Arduino Library Manager, or by downloading the latest package from [releases page](https://github.com/Blake-Tourneur/sevenSegment/releases).
 #### Future update list (current version 2.0.0):
 2.0.1 - Update examples for new version/functions
+
 2.1.0 - Add support for displays with a decimal point
+
 3.0.0 - Add support for 14-segment displays, 16-segment displays, dot matrix displays and rename library to Segment.
 
 # License
