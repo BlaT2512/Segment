@@ -60,9 +60,7 @@ The examples available for this library are:
 
 # Updates
 Updates can be done through the Arduino Library Manager, or by downloading the latest package from [releases page](https://github.com/Blake-Tourneur/sevenSegment/releases).
-#### Future update list (current version 2.0.1):
-2.1.0 - Move large variable (numMatrix) to PROGMEM (this saves memory on the Arduino as it currently uses around 90% of Arduino SRAM storage because of the all the data for every letter, character and number.
-
+#### Future update list (current version 2.1.0):
 2.2.0 - Fix an error where only shift register displays work.
 
 2.3.0 - Add support for displays with a decimal point.
