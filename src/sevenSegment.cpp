@@ -8,6 +8,71 @@
 #include "Arduino.h"
 #include "sevenSegment.h"
 
+const int sevenSegment::_numMatrix[60][8] PROGMEM {
+     //segments
+     //g,f,e,d,c,b,a,0
+      {0,1,1,1,1,1,1,0}, //ZERO
+      {0,0,0,0,1,1,0,0}, //ONE
+      {1,0,1,1,0,1,1,0}, //TWO
+      {1,0,0,1,1,1,1,0}, //THREE
+      {1,1,0,0,1,1,0,0}, //FOUR
+      {1,1,0,1,1,0,1,0}, //FIVE
+      {1,1,1,1,1,0,1,0}, //SIX
+      {0,0,0,0,1,1,1,0}, //SEVEN
+      {1,1,1,1,1,1,1,0}, //EIGHT
+      {1,1,0,1,1,1,1,0}, //NINE
+      {1,1,1,0,1,1,1,0}, //LETTER A
+      {1,1,1,1,1,0,0,0}, //LETTER B
+      {0,1,1,1,0,0,1,0}, //LETTER C
+      {1,0,1,1,1,1,0,0}, //LETTER D
+      {1,1,1,1,0,0,1,0}, //LETTER E
+      {1,1,1,0,0,0,1,0}, //LETTER F
+      {0,1,1,1,1,0,1,0}, //LETTER G
+      {1,1,1,0,1,0,0,0}, //LETTER H
+      {0,1,1,0,0,0,0,0}, //LETTER I
+      {0,0,1,1,1,1,0,0}, //LETTER J
+      {1,1,1,0,1,0,1,0}, //LETTER K
+      {0,1,1,1,0,0,0,0}, //LETTER L
+      {0,0,1,0,1,0,1,0}, //LETTER M
+      {0,1,1,0,1,1,1,0}, //LETTER N
+      {0,1,1,1,1,1,1,0}, //LETTER O
+      {1,1,1,0,0,1,1,0}, //LETTER P
+      {1,1,0,0,1,1,1,0}, //LETTER Q
+      {0,1,1,0,0,1,1,0}, //LETTER R
+      {1,1,0,1,1,0,1,0}, //LETTER S
+      {1,1,1,1,0,0,0,0}, //LETTER T
+      {0,1,1,1,1,1,0,0}, //LETTER U
+      {0,1,0,1,1,1,0,0}, //LETTER V
+      {0,1,0,1,0,1,0,0}, //LETTER W
+      {1,1,1,0,1,1,0,0}, //LETTER X
+      {1,1,0,1,1,1,0,0}, //LETTER Y
+      {1,0,0,1,0,1,1,0}, //LETTER Z
+      {0,0,0,0,0,0,0,0}, //BLANK
+      {0,1,0,0,0,1,0,0}, //CHARACTER "
+      {0,1,1,0,1,1,0,0}, //CHARACTER #
+      {1,1,0,1,0,0,1,0}, //CHARACTER $
+      {0,1,0,1,1,0,1,0}, //CHARACTER %
+      {1,1,1,1,0,1,1,0}, //CHARACTER &
+      {0,0,0,0,0,1,0,0}, //CHARACTER ' `
+      {0,1,1,1,0,0,1,0}, //CHARACTER ( [ {
+      {0,0,0,1,1,1,1,0}, //CHARACTER ) ] }
+      {1,1,0,0,0,1,1,0}, //CHARACTER *
+      {1,1,1,0,0,0,0,0}, //CHARACTER +
+      {0,0,0,1,1,0,0,0}, //CHARACTER ,
+      {1,0,0,0,0,0,0,0}, //CHARACTER - ~
+      {1,0,0,0,0,1,0,0}, //CHARACTER /
+      {1,0,0,1,0,0,0,0}, //CHARACTER :
+      {1,0,0,1,1,0,0,0}, //CHARACTER ;
+      {1,1,0,0,0,0,1,0}, //CHARACTER <
+      {1,0,0,0,0,0,1,0}, //CHARACTER =
+      {1,0,0,0,0,1,1,0}, //CHARACTER >
+      {1,0,1,0,0,1,1,0}, //CHARACTER ?
+      {1,0,1,1,1,1,1,0}, //CHARACTER @
+      {1,1,0,0,0,0,0,0}, //CHARACTER (back slash)
+      {0,1,0,0,0,1,1,0}, //CHARACTER ^
+      {0,0,0,1,0,0,0,0}  //CHARACTER _
+};
+
 sevenSegment::sevenSegment(int sega, int segb, int segc, int segd, int sege, int segf, int segg){
   pinMode(sega, OUTPUT);
   pinMode(segb, OUTPUT);
@@ -48,7 +113,7 @@ void sevenSegment::_Latching(){
 
 void sevenSegment::_Write(int _Numeral){
   for (_bitNum = 0;_bitNum < 8;_bitNum++){
-    digitalWrite(_Data,_numMatrix[_Numeral][_bitNum]);
+    digitalWrite(_Data,pgm_read_word_near(_numMatrix[_Numeral] + _bitNum));
     _Clocking();
   }
   _Latching();
@@ -124,6 +189,7 @@ void sevenSegment::clear(int displays){
     display(' ');
     delay(10);
   }
+  delay(100);
 }
 
 void sevenSegment::displayString(String word, int displays, bool cleardisp){
