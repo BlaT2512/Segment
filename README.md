@@ -1,7 +1,7 @@
 # sevenSegment Library
 Welcome to the sevenSegment library! This is an Arduino library for seven-segment displays, wired up to the arduino using 8 wires (sega - segg) OR with a shift register (clock, latch and data).
 
-<img src="extras/SevSeg.png" alt="drawing" width="200"/>
+<img src="extras/SevSeg.png" alt="seven segment display" width="200"/>
 
 # Installation
 To install sevenSegment, install it using the Arduino library manager, or manually from the [releases page](https://github.com/Blake-Tourneur/sevenSegment/releases).
@@ -65,9 +65,11 @@ Updates can be done through the Arduino Library Manager, or by downloading the l
 
 2.1.0 - Move large variable (numMatrix) to PROGMEM (this saves memory on the Arduino as it currently uses around 90% of Arduino SRAM storage because of the all the data for every letter, character and number.
 
-2.2.0 - Add support for displays with a decimal point
+2.2.0 - Fix an error where only shift register displays work.
 
-3.0.0 - Add support for 14-segment displays, 16-segment displays, dot matrix displays and rename library to Segment.
+2.3.0 - Add support for displays with a decimal point.
+
+3.0.0 - Add support for 14-segment displays, 16-segment displays, dot matrix displays and (possibly) rename library to Segment.
 
 # License
 This library is licensed under the `Apache 2.0` license. For more information, [click here](https://www.apache.org/licenses/LICENSE-2.0).
