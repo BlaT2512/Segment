@@ -63,7 +63,9 @@ Updates can be done through the Arduino Library Manager, or by downloading the l
 #### Future update list (current version 2.0.0):
 2.0.1 - Update examples for new version/functions
 
-2.1.0 - Add support for displays with a decimal point
+2.1.0 - Move large variable (numMatrix) to PROGMEM (this saves memory on the Arduino as it currently uses around 90% of Arduino SRAM storage because of the all the data for every letter, character and number.
+
+2.2.0 - Add support for displays with a decimal point
 
 3.0.0 - Add support for 14-segment displays, 16-segment displays, dot matrix displays and rename library to Segment.
 
