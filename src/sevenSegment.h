@@ -37,6 +37,7 @@ class sevenSegment
     char _char;
     String _word;
     bool _cleardisp;
+    bool _sreg;
     static const int _numMatrix[60][8] PROGMEM;
 };
 

@@ -88,6 +88,7 @@ sevenSegment::sevenSegment(int sega, int segb, int segc, int segd, int sege, int
   _sege = sege;
   _segf = segf;
   _segg = segg;
+  _sreg = false;
 }
 
 sevenSegment::sevenSegment(int Data, int Clock, int Latch){
@@ -97,6 +98,7 @@ sevenSegment::sevenSegment(int Data, int Clock, int Latch){
   _Data = Data;
   _Clock = Clock;
   _Latch = Latch;
+  _sreg = true;
 }
 
 void sevenSegment::_Clocking(){
@@ -112,11 +114,22 @@ void sevenSegment::_Latching(){
 }
 
 void sevenSegment::_Write(int _Numeral){
-  for (_bitNum = 0;_bitNum < 8;_bitNum++){
-    digitalWrite(_Data,pgm_read_word_near(_numMatrix[_Numeral] + _bitNum));
-    _Clocking();
+  if (_sreg) {
+    for (_bitNum = 0;_bitNum < 8;_bitNum++){
+      digitalWrite(_Data,pgm_read_word_near(_numMatrix[_Numeral] + _bitNum));
+      _Clocking();
+    }
+    _Latching();
   }
-  _Latching();
+  else {
+    digitalWrite(_segg,pgm_read_word_near(_numMatrix[_Numeral] + 0));
+    digitalWrite(_segf,pgm_read_word_near(_numMatrix[_Numeral] + 1));
+    digitalWrite(_sege,pgm_read_word_near(_numMatrix[_Numeral] + 2));
+    digitalWrite(_segd,pgm_read_word_near(_numMatrix[_Numeral] + 3));
+    digitalWrite(_segc,pgm_read_word_near(_numMatrix[_Numeral] + 4));
+    digitalWrite(_segb,pgm_read_word_near(_numMatrix[_Numeral] + 5));
+    digitalWrite(_sega,pgm_read_word_near(_numMatrix[_Numeral] + 6));
+  }
 }
 
 void sevenSegment::display(char charac){
