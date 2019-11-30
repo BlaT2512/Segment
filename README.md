@@ -69,7 +69,7 @@ Updates can be done through the Arduino Library Manager, or by downloading the l
 
 2.3.0 - Add support for displays with a decimal point.
 
-3.0.0 - Add support for 14-segment displays, 16-segment displays, dot matrix displays and (possibly) rename library to Segment.
+3.0.0 - Add support for 14-segment displays, 16-segment displays, dot matrix displays, BCD (binary coded decimal) decoder wired displays and (possibly) rename library to Segment.
 
 # License
 This library is licensed under the `Apache 2.0` license. For more information, [click here](https://www.apache.org/licenses/LICENSE-2.0).
