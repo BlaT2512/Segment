@@ -22,7 +22,7 @@ sevenSegment sevseg(5, 6, 7);   // Set the pins you want (Data, Clock, Latch)
 ```
 
 ### Commands
-You can currently print to your seven segment display most possible English alphanumeric characters and symbols. It is possible to print: Numbers 0-9, Letters A-Z and Characters "#$%&'()*+,-~/\`:;<=>?[]{}\\^_
+You can currently print to your seven segment display most possible English alphanumeric characters and symbols. It is possible to print: Numbers 0-9, Letters A-Z and Characters "#$%&'()*+,-~/\`:;<=>?[]{}.\\^_!
 
 The format of the function is `sevseg.display(char charac)`.
 
@@ -42,9 +42,9 @@ The format of the function is `sevseg.displayString(String word, int displays = 
 Here are some examples of printing strings:
 ```
   sevseg.displayString("Hello"); // Display Hello on 1 display, and clear the display beforehand
-  sevseg.displayString("Goodbye", 4); // Display Goodbye on 4 displays, and clear the displays beforehand
+  sevseg.displayString("Good bye", 4); // Display Good bye on 4 displays, and clear the displays beforehand
   sevseg.displayString("OK", 3, false); // Display OK on 3 displays, and don't clear the displays beforehand (since there are three displays, the 3rd one will have a letter from the previous display on it as it isn't cleared)
-  sevseg.displayString("Seeya", 5, true); // Display Seeya on 5 displays, and clear the displays beforehand
+  sevseg.displayString("Awesome!", 5, true); // Display Awesome! on 5 displays, and clear the displays beforehand
 ```
 
 And to clear the display, use `sevseg.clear(displays)`, where displays is the number of 7seg displays daisy-chained (integer). The command will clear them all. To just clear one display (or, if you have multiple, it will be like a space/gap), use `sevseg.display(' ')` or `sevseg.clear()`.
@@ -60,9 +60,7 @@ The examples available for this library are:
 
 # Updates
 Updates can be done through the Arduino Library Manager, or by downloading the latest package from [releases page](https://github.com/Blake-Tourneur/sevenSegment/releases).
-#### Future update list (current version 2.1.0):
-2.2.0 - Fix an error where only shift register displays work.
-
+#### Future update list (current version 2.2.0):
 2.3.0 - Add support for displays with a decimal point.
 
 3.0.0 - Add support for 14-segment displays, 16-segment displays, dot matrix displays, BCD (binary coded decimal) decoder wired displays and (possibly) rename library to Segment.
