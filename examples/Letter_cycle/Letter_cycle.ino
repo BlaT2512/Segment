@@ -7,9 +7,11 @@
 //sevenSegment sevseg(5, 6, 7);                // Uncomment for shift register wiring pins (Data, Clock, Latch)
 
 int delayTime = 1000;   // Milliseconds to delay after each number (default 1 second)
+int displays = 4;  // Number of seven segment displays you have daisy-chained (default 1)
 
 void setup() {
-  // Nothing needs to go here, the library sets up the pins for you
+  // Nothing needs to go here apart from clearing the displays, the library sets up the pins for you
+  sevseg.clear(displays);
 }
 
 void loop() {
@@ -18,6 +20,6 @@ void loop() {
     sevseg.display(ch); // Display the letter, ch
     delay(delayTime); // Delay for the delay time specified in the integer delayTime
   }
-  sevseg.display('~'); // Include clearing the screen in the display cycle
+  sevseg.clear(); // Include clearing the screen in the display cycle
   delay(delayTime);
 }

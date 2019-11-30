@@ -4,7 +4,7 @@
 // Un-comment the one you are using below!
 
 //sevenSegment sevseg(5, 6, 7, 8, 9, 10, 11);  // Uncomment for straight wiring pins (segment a - segment g)
-sevenSegment sevseg(4, 6, 5);                // Uncomment for shift register wiring pins (Data, Clock, Latch)
+//sevenSegment sevseg(5, 6, 7);                // Uncomment for shift register wiring pins (Data, Clock, Latch)
 
 String incoming = ""; // This is where we will store what is recieved from the serial
 int displays = 4; // Change this to the numbers of 7seg-displays you are using (daisy chained)
@@ -19,41 +19,6 @@ void loop() {
   incoming = Serial.readString(); // Retrieve the entered string from the serial
   incoming.trim(); // Remove newline characters and whitespace from the end
 
-  // CLEAR THE DISPLAYS
-  for (int i = 0; i <= displays; i++) { // Repeat for all the seven-segment displays you have
-    sevseg.display('~'); // Clear the displays
-    delay(10);
-  }
-  delay(100);
-
-  // DETERMINE WHETHER THE STRING NEEDS TO BE SCROLLED
-  if (incoming.length() <= displays){ // If the string length is less than or the same as the number of screens
-      // STRING DOESN'T NEED TO BE SCROLLED
-      for (int i = 0; i <= incoming.length() - 1; i++) { // Repeat for each character of the string that came in the serial
-        sevseg.display(incoming.charAt(i)); // Display the corresponding character on the 7 segment display
-        delay(10);
-      }
-  }
-  else {
-      // STRING NEEDS TO BE SCROLLED
-      for (int i = 0; i <= incoming.length() - 1; i++) { // Repeat for each character of the string that came in the serial
-        sevseg.display(incoming.charAt(i)); // Display the corresponding character on the 7 segment display
-        delay(1000);
-        if (Serial.available()) break;
-        
-        if (i >= incoming.length() - 1){ // If this is the last character
-          delay(1000); // Delay 1 second
-          if (Serial.available()) break;
-          delay(1000); // Delay 1 second
-          if (Serial.available()) break;
-          delay(1000); // Delay 1 second
-          if (Serial.available()) break;
-          sevseg.display('~');
-          delay(1000);
-          i = -1; // Start the cycle again on -1, as 1 will get added when it starts again making the variable 0
-        }
-        
-        if (Serial.available()) break;
-      }
-  }
+  // DISPLAY THE STRING
+  sevseg.displayString(incoming, displays, true); // Display the string "incoming" on the number of displays in the variable 'displays', and clear the displays beforehand
 }
