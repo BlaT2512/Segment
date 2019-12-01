@@ -14,6 +14,7 @@ class sevenSegment
 {
   public:
     sevenSegment(int sega, int segb, int segc, int segd, int sege, int segf, int segg);
+    sevenSegment(int sega, int segb, int segc, int segd, int sege, int segf, int segg, int segdp);
     sevenSegment(int Data, int Clock, int Latch);
     void display(char charac);
     void clear(int displays = 1);
@@ -30,6 +31,7 @@ class sevenSegment
     int _sege;
     int _segf;
     int _segg;
+    int _segdp;
     int _Data;
     int _Clock;
     int _Latch;
@@ -37,8 +39,20 @@ class sevenSegment
     char _char;
     String _word;
     bool _cleardisp;
-    bool _sreg;
-    static const int _numMatrix[60][8] PROGMEM;
+    int _segMode;
+    // _segMode states are:
+    // 1 - 7 segment straight wired display
+    // 2 - 7 segment straight wired display, decimal point
+    // 3 - 7 segment shift register display (8-bit shift register so includes decimal point even if your display doesn't have one, you just won't see anything)
+    // Future possibilities:
+    // 4 - 14 segment straight wired display
+    // 5 - 14 segment straight wired display, decimal point
+    // 6 - 14 segment shift register display (16-bit shift register so includes decimal point and one extra output which isn't used)
+    // 7 - 16 segment straight wired display
+    // 8 - 16 segment straight wired display, decimal point
+    // 9 - 16 segment shift register display (16-bit shift register so you can't use a decimal point)
+    // 10 - Dot matrix display
+    static const int _numMatrix[62][8] PROGMEM;
 };
 
 #endif

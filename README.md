@@ -1,5 +1,5 @@
 # sevenSegment Library
-Welcome to the sevenSegment library! This is an Arduino library for seven-segment displays, wired up to the arduino using 8 wires (sega - segg) OR with a shift register (clock, latch and data).
+Welcome to the sevenSegment library! This is an Arduino library for seven-segment displays, wired up to the arduino using 7 wires (sega - segg), with a decimal point (sega - dp) or with a shift register (clock, latch and data).
 
 <img src="extras/SevSeg.png" alt="seven segment display" width="200"/>
 
@@ -8,17 +8,25 @@ To install sevenSegment, install it using the Arduino library manager, or manual
 
 # Using the library / syntax
 ### Declare the library
-You can either declare the library for use with straight wiring or with a shift register.
+You can either declare the library for use with straight wiring, straight wiring with a decimal point or with a shift register.
 
 STRAIGHT WIRING:
 ```
 #include <sevenSegment.h>   // Include the sevenSegment library
-sevenSegment sevseg(5, 6, 7, 8, 9, 10, 11);   // Set the pins you want (segment a - segment g)
+sevenSegment sevseg(5, 6, 7, 8, 9, 10, 11);   // Set the pins you want
+//        Segments: a, b, c, d, e, f,  g
+```
+STRAIGHT WIRING WITH DECIMAL POINT:
+```
+#include <sevenSegment.h>   // Include the sevenSegment library
+sevenSegment sevseg(5, 6, 7, 8, 9, 10, 11, 12);   // Set the pins you want
+//        Segments: a, b, c, d, e, f,  g,  dp
 ```
 SHIFT REGISTER WIRING:
 ```
 #include <sevenSegment.h>   // Include the sevenSegment library
-sevenSegment sevseg(5, 6, 7);   // Set the pins you want (Data, Clock, Latch)
+sevenSegment sevseg(5, 6, 7);   // Set the pins you want
+//            Pins: D, C, L
 ```
 
 ### Commands
@@ -33,7 +41,7 @@ Here are some examples of printing single characters:
   sevseg.display(';'); // Display character ;
   sevseg.display('G'); // Display letter G
   sevseg.display('3'); // Display number 3
-  sevseg.display('/'); // Display character /
+  sevseg.display('!'); // Display character ! (only supported for display with decimal point)
 ```
 You can also print a string to the display(s), and it will print all the characters. By specifying the number of displays daisy-chained, it will automatically scroll the text if there is more characters in it than the number of displays. Also, you can specify whether to clear displays beforehand. If not and a word is shorter than the number of displays, there will be a letter from the previous word on unused displays.
 
@@ -60,9 +68,7 @@ The examples available for this library are:
 
 # Updates
 Updates can be done through the Arduino Library Manager, or by downloading the latest package from [releases page](https://github.com/Blake-Tourneur/sevenSegment/releases).
-#### Future update list (current version 2.2.0):
-2.3.0 - Add support for displays with a decimal point.
-
+#### Future update list (current version 2.3.0):
 3.0.0 - Add support for 14-segment displays, 16-segment displays, dot matrix displays, BCD (binary coded decimal) decoder wired displays and (possibly) rename library to Segment.
 
 # License

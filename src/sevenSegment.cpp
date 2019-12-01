@@ -8,9 +8,9 @@
 #include "Arduino.h"
 #include "sevenSegment.h"
 
-const int sevenSegment::_numMatrix[60][8] PROGMEM {
+const int sevenSegment::_numMatrix[62][8] PROGMEM {
      //segments
-     //g,f,e,d,c,b,a,0
+     //g,f,e,d,c,b,a,dp
       {0,1,1,1,1,1,1,0}, //ZERO
       {0,0,0,0,1,1,0,0}, //ONE
       {1,0,1,1,0,1,1,0}, //TWO
@@ -70,7 +70,9 @@ const int sevenSegment::_numMatrix[60][8] PROGMEM {
       {1,0,1,1,1,1,1,0}, //CHARACTER @
       {1,1,0,0,0,0,0,0}, //CHARACTER (back slash)
       {0,1,0,0,0,1,1,0}, //CHARACTER ^
-      {0,0,0,1,0,0,0,0}  //CHARACTER _
+      {0,0,0,1,0,0,0,0}, //CHARACTER _
+      {0,0,0,0,0,1,0,1}, //CHARACTER !
+      {0,0,0,0,0,0,0,1}  //CHARACTER .
 };
 
 sevenSegment::sevenSegment(int sega, int segb, int segc, int segd, int sege, int segf, int segg){
@@ -88,7 +90,27 @@ sevenSegment::sevenSegment(int sega, int segb, int segc, int segd, int sege, int
   _sege = sege;
   _segf = segf;
   _segg = segg;
-  _sreg = false;
+  _segMode = 1;
+}
+
+sevenSegment::sevenSegment(int sega, int segb, int segc, int segd, int sege, int segf, int segg, int segdp){
+  pinMode(sega, OUTPUT);
+  pinMode(segb, OUTPUT);
+  pinMode(segc, OUTPUT);
+  pinMode(segd, OUTPUT);
+  pinMode(sege, OUTPUT);
+  pinMode(segf, OUTPUT);
+  pinMode(segg, OUTPUT);
+  pinMode(segdp, OUTPUT);
+  _sega = sega;
+  _segb = segb;
+  _segc = segc;
+  _segd = segd;
+  _sege = sege;
+  _segf = segf;
+  _segg = segg;
+  _segdp = segdp;
+  _segMode = 2;
 }
 
 sevenSegment::sevenSegment(int Data, int Clock, int Latch){
@@ -98,7 +120,7 @@ sevenSegment::sevenSegment(int Data, int Clock, int Latch){
   _Data = Data;
   _Clock = Clock;
   _Latch = Latch;
-  _sreg = true;
+  _segMode = 3;
 }
 
 void sevenSegment::_Clocking(){
@@ -114,14 +136,14 @@ void sevenSegment::_Latching(){
 }
 
 void sevenSegment::_Write(int _Numeral){
-  if (_sreg) {
+  if (_segMode == 3) {
     for (_bitNum = 0;_bitNum < 8;_bitNum++){
       digitalWrite(_Data,pgm_read_word_near(_numMatrix[_Numeral] + _bitNum));
       _Clocking();
     }
     _Latching();
   }
-  else {
+  else if (_segMode == 1) {
     digitalWrite(_segg,pgm_read_word_near(_numMatrix[_Numeral] + 0));
     digitalWrite(_segf,pgm_read_word_near(_numMatrix[_Numeral] + 1));
     digitalWrite(_sege,pgm_read_word_near(_numMatrix[_Numeral] + 2));
@@ -129,6 +151,16 @@ void sevenSegment::_Write(int _Numeral){
     digitalWrite(_segc,pgm_read_word_near(_numMatrix[_Numeral] + 4));
     digitalWrite(_segb,pgm_read_word_near(_numMatrix[_Numeral] + 5));
     digitalWrite(_sega,pgm_read_word_near(_numMatrix[_Numeral] + 6));
+  }
+  else if (_segMode == 2) {
+    digitalWrite(_segg,pgm_read_word_near(_numMatrix[_Numeral] + 0));
+    digitalWrite(_segf,pgm_read_word_near(_numMatrix[_Numeral] + 1));
+    digitalWrite(_sege,pgm_read_word_near(_numMatrix[_Numeral] + 2));
+    digitalWrite(_segd,pgm_read_word_near(_numMatrix[_Numeral] + 3));
+    digitalWrite(_segc,pgm_read_word_near(_numMatrix[_Numeral] + 4));
+    digitalWrite(_segb,pgm_read_word_near(_numMatrix[_Numeral] + 5));
+    digitalWrite(_sega,pgm_read_word_near(_numMatrix[_Numeral] + 6));
+    digitalWrite(_segdp,pgm_read_word_near(_numMatrix[_Numeral] + 7));
   }
 }
 
@@ -194,6 +226,8 @@ void sevenSegment::display(char charac){
   else if (_char == '\\') _Write(57);
   else if (_char == '^') _Write(58);
   else if (_char == '_') _Write(59);
+  else if (_char == '!' && _segMode > 1) _Write(60); // Your display has to have a decimal point to display this character
+  else if (_char == '.' && _segMode > 1) _Write(61); // Your display has to have a decimal point to display this character
 }
 
 void sevenSegment::clear(int displays){

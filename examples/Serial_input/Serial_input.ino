@@ -1,10 +1,11 @@
 #include <sevenSegment.h> // Include the sevenSegment library
 
-// The library can either be declared using pins straight (sega-segg) or with a shift register (data, clock, latch)
+// The library can either be declared using pins straight (sega-segg), pins straight with decimal point (sega-segdp) or with a shift register (data, clock, latch) (dp or no dp)
 // Un-comment the one you are using below!
 
-//sevenSegment sevseg(5, 6, 7, 8, 9, 10, 11);  // Uncomment for straight wiring pins (segment a - segment g)
-//sevenSegment sevseg(5, 6, 7);                // Uncomment for shift register wiring pins (Data, Clock, Latch)
+//sevenSegment sevseg(5, 6, 7, 8, 9, 10, 11);      // Uncomment for straight wiring pins (segment a - segment g)
+//sevenSegment sevseg(5, 6, 7, 8, 9, 10, 11, 12);  // Uncomment for straight wiring pins with a decimal point (segment a - decimal point)
+//sevenSegment sevseg(5, 6, 7);                    // Uncomment for shift register wiring pins (Data, Clock, Latch) (it doesn't matter if it has a decimal point or not)
 
 String incoming = ""; // This is where we will store what is recieved from the serial
 int displays = 4; // Change this to the numbers of 7seg-displays you are using (daisy chained)
