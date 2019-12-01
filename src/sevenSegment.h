@@ -13,8 +13,8 @@
 class sevenSegment
 {
   public:
-    sevenSegment(int sega, int segb, int segc, int segd, int sege, int segf, int segg, bool cathode);
-    sevenSegment(int sega, int segb, int segc, int segd, int sege, int segf, int segg, int segdp, bool cathode);
+    sevenSegment(int sega, int segb, int segc, int segd, int sege, int segf, int segg, bool cathode = true);
+    sevenSegment(int sega, int segb, int segc, int segd, int sege, int segf, int segg, int segdp, bool cathode = true);
     sevenSegment(int Data, int Clock, int Latch, bool cathode = true);
     void display(char charac);
     void clear(int displays = 1);
