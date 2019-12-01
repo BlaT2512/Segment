@@ -69,13 +69,17 @@ The examples available for this library are:
 # Updates
 Updates can be done through the Arduino Library Manager, or by downloading the latest package from [releases page](https://github.com/Blake-Tourneur/sevenSegment/releases).
 #### Future update list (current version 2.5.0):
+2.6.0 - Add fun/example function to do things such as scroll through every number, letter or character, scroll through segments clockwise/counterclockwise and more
+
 3.0.0 - Add support for 16-segment displays
 
 3.0.1 - Rename library to Segment.
 
-3.1.0 - Add support for 14-segment displays
+3.1.0 - Configure library to only compile functions/matrixes that are used to Arduino (this saves space with the large matrixes for the 16seg display, 14seg display and 7seg display)
 
-3.2.0 - Add support for dot matrix displays
+3.2.0 - Add support for 14-segment displays
+
+3.3.0 - Add support for dot matrix displays
 #### Possible updates
 Add support for BCD (binary coded decimal) decoder wired displays
 
