@@ -75,7 +75,7 @@ const int sevenSegment::_numMatrix[62][8] PROGMEM {
       {0,0,0,0,0,0,0,1}  //CHARACTER .
 };
 
-sevenSegment::sevenSegment(int sega, int segb, int segc, int segd, int sege, int segf, int segg){
+sevenSegment::sevenSegment(int sega, int segb, int segc, int segd, int sege, int segf, int segg, bool cathode){
   pinMode(sega, OUTPUT);
   pinMode(segb, OUTPUT);
   pinMode(segc, OUTPUT);
@@ -91,9 +91,10 @@ sevenSegment::sevenSegment(int sega, int segb, int segc, int segd, int sege, int
   _segf = segf;
   _segg = segg;
   _segMode = 1;
+  _cathode = cathode;
 }
 
-sevenSegment::sevenSegment(int sega, int segb, int segc, int segd, int sege, int segf, int segg, int segdp){
+sevenSegment::sevenSegment(int sega, int segb, int segc, int segd, int sege, int segf, int segg, int segdp, bool cathode){
   pinMode(sega, OUTPUT);
   pinMode(segb, OUTPUT);
   pinMode(segc, OUTPUT);
@@ -111,9 +112,10 @@ sevenSegment::sevenSegment(int sega, int segb, int segc, int segd, int sege, int
   _segg = segg;
   _segdp = segdp;
   _segMode = 2;
+  _cathode = cathode;
 }
 
-sevenSegment::sevenSegment(int Data, int Clock, int Latch){
+sevenSegment::sevenSegment(int Data, int Clock, int Latch, bool cathode){
   pinMode(Data, OUTPUT);
   pinMode(Clock, OUTPUT);
   pinMode(Latch, OUTPUT);
@@ -121,6 +123,7 @@ sevenSegment::sevenSegment(int Data, int Clock, int Latch){
   _Clock = Clock;
   _Latch = Latch;
   _segMode = 3;
+  _cathode = cathode;
 }
 
 void sevenSegment::_Clocking(){
@@ -136,14 +139,21 @@ void sevenSegment::_Latching(){
 }
 
 void sevenSegment::_Write(int _Numeral){
-  if (_segMode == 3) {
+  if (_segMode == 3 && _cathode) {
     for (_bitNum = 0;_bitNum < 8;_bitNum++){
       digitalWrite(_Data,pgm_read_word_near(_numMatrix[_Numeral] + _bitNum));
       _Clocking();
     }
     _Latching();
   }
-  else if (_segMode == 1) {
+  else if (_segMode == 3 && !_cathode) {
+    for (_bitNum = 0;_bitNum < 8;_bitNum++){
+      digitalWrite(_Data,!pgm_read_word_near(_numMatrix[_Numeral] + _bitNum));
+      _Clocking();
+    }
+    _Latching();
+  }
+  else if (_segMode == 1 && _cathode) {
     digitalWrite(_segg,pgm_read_word_near(_numMatrix[_Numeral] + 0));
     digitalWrite(_segf,pgm_read_word_near(_numMatrix[_Numeral] + 1));
     digitalWrite(_sege,pgm_read_word_near(_numMatrix[_Numeral] + 2));
@@ -152,7 +162,16 @@ void sevenSegment::_Write(int _Numeral){
     digitalWrite(_segb,pgm_read_word_near(_numMatrix[_Numeral] + 5));
     digitalWrite(_sega,pgm_read_word_near(_numMatrix[_Numeral] + 6));
   }
-  else if (_segMode == 2) {
+  else if (_segMode == 1 && !_cathode) {
+    digitalWrite(_segg,!pgm_read_word_near(_numMatrix[_Numeral] + 0));
+    digitalWrite(_segf,!pgm_read_word_near(_numMatrix[_Numeral] + 1));
+    digitalWrite(_sege,!pgm_read_word_near(_numMatrix[_Numeral] + 2));
+    digitalWrite(_segd,!pgm_read_word_near(_numMatrix[_Numeral] + 3));
+    digitalWrite(_segc,!pgm_read_word_near(_numMatrix[_Numeral] + 4));
+    digitalWrite(_segb,!pgm_read_word_near(_numMatrix[_Numeral] + 5));
+    digitalWrite(_sega,!pgm_read_word_near(_numMatrix[_Numeral] + 6));
+  }
+  else if (_segMode == 2 && _cathode) {
     digitalWrite(_segg,pgm_read_word_near(_numMatrix[_Numeral] + 0));
     digitalWrite(_segf,pgm_read_word_near(_numMatrix[_Numeral] + 1));
     digitalWrite(_sege,pgm_read_word_near(_numMatrix[_Numeral] + 2));
@@ -161,6 +180,16 @@ void sevenSegment::_Write(int _Numeral){
     digitalWrite(_segb,pgm_read_word_near(_numMatrix[_Numeral] + 5));
     digitalWrite(_sega,pgm_read_word_near(_numMatrix[_Numeral] + 6));
     digitalWrite(_segdp,pgm_read_word_near(_numMatrix[_Numeral] + 7));
+  }
+  else if (_segMode == 2 && !_cathode) {
+    digitalWrite(_segg,!pgm_read_word_near(_numMatrix[_Numeral] + 0));
+    digitalWrite(_segf,!pgm_read_word_near(_numMatrix[_Numeral] + 1));
+    digitalWrite(_sege,!pgm_read_word_near(_numMatrix[_Numeral] + 2));
+    digitalWrite(_segd,!pgm_read_word_near(_numMatrix[_Numeral] + 3));
+    digitalWrite(_segc,!pgm_read_word_near(_numMatrix[_Numeral] + 4));
+    digitalWrite(_segb,!pgm_read_word_near(_numMatrix[_Numeral] + 5));
+    digitalWrite(_sega,!pgm_read_word_near(_numMatrix[_Numeral] + 6));
+    digitalWrite(_segdp,!pgm_read_word_near(_numMatrix[_Numeral] + 7));
   }
 }
 

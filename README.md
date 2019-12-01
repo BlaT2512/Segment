@@ -8,25 +8,25 @@ To install sevenSegment, install it using the Arduino library manager, or manual
 
 # Using the library / syntax
 ### Declare the library
-You can either declare the library for use with straight wiring, straight wiring with a decimal point or with a shift register.
+You can either declare the library for use with straight wiring, straight wiring with a decimal point or with a shift register. You also specify whether you have a common cathode (one ground pin on the display and a positive pin for all the segments) or a common anode display (one positive pin on the display and a ground pin for all the segments). True is common cathode and False is common anode.
 
 STRAIGHT WIRING:
 ```
 #include <sevenSegment.h>   // Include the sevenSegment library
-sevenSegment sevseg(5, 6, 7, 8, 9, 10, 11);   // Set the pins you want
-//        Segments: a, b, c, d, e, f,  g
+sevenSegment sevseg(5, 6, 7, 8, 9, 10, 11, true);   // Set the pins you want and whether the display is common anode/cathode
+//        Segments: a, b, c, d, e, f,  g,  c a/c
 ```
 STRAIGHT WIRING WITH DECIMAL POINT:
 ```
 #include <sevenSegment.h>   // Include the sevenSegment library
-sevenSegment sevseg(5, 6, 7, 8, 9, 10, 11, 12);   // Set the pins you want
-//        Segments: a, b, c, d, e, f,  g,  dp
+sevenSegment sevseg(5, 6, 7, 8, 9, 10, 11, 12, true);   // Set the pins you want and whether the display is common anode/cathode
+//        Segments: a, b, c, d, e, f,  g,  dp, c a/c
 ```
 SHIFT REGISTER WIRING:
 ```
 #include <sevenSegment.h>   // Include the sevenSegment library
-sevenSegment sevseg(5, 6, 7);   // Set the pins you want
-//            Pins: D, C, L
+sevenSegment sevseg(5, 6, 7, true);   // Set the pins you want and whether the display is common anode/cathode
+//            Pins: D, C, L, c a/c
 ```
 
 ### Commands
@@ -68,9 +68,7 @@ The examples available for this library are:
 
 # Updates
 Updates can be done through the Arduino Library Manager, or by downloading the latest package from [releases page](https://github.com/Blake-Tourneur/sevenSegment/releases).
-#### Future update list (current version 2.3.1):
-2.4.0 - Add support for common anode displays (the library currently only supports common cathode displays)
-
+#### Future update list (current version 2.4.0):
 2.5.0 - Add support for BCD (binary coded decimal) decoder wired displays
 
 3.0.0 - Add support for 16-segment displays
