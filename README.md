@@ -69,7 +69,17 @@ The examples available for this library are:
 # Updates
 Updates can be done through the Arduino Library Manager, or by downloading the latest package from [releases page](https://github.com/Blake-Tourneur/sevenSegment/releases).
 #### Future update list (current version 2.3.1):
-3.0.0 - Add support for 14-segment displays, 16-segment displays, dot matrix displays, BCD (binary coded decimal) decoder wired displays and (possibly) rename library to Segment.
+2.4.0 - Add support for common anode displays (the library currently only supports common cathode displays)
+
+2.5.0 - Add support for BCD (binary coded decimal) decoder wired displays
+
+3.0.0 - Add support for 16-segment displays
+
+3.0.1 - Rename library to Segment.
+
+3.1.0 - Add support for 14-segment displays
+
+3.2.0 - Add support for dot matrix displays
 
 # License
 This library is licensed under the `Apache 2.0` license. For more information, [click here](https://www.apache.org/licenses/LICENSE-2.0).
