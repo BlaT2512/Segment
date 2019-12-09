@@ -71,7 +71,7 @@ The examples available for this library are:
 # Updates
 Updates can be done through the Arduino Library Manager, or by downloading the latest package from [releases page](https://github.com/BlaT2512/sevenSegment/releases).
 #### Future update list (current version 2.5.0):
-2.6.0 - Add fun/example function to do things such as scroll through every number, letter or character, scroll through segments clockwise/counterclockwise and more
+2.6.0 - Add fun/example function to do things such as scroll through every number, letter or character, scroll through segments clockwise/counterclockwise, tetris display of characters, and more
 
 3.0.0 - Add support for 16-segment displays
 
