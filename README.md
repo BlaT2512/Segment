@@ -69,7 +69,7 @@ The examples available for this library are:
 `Serial_Input.ino` - Prints the character/string on the seven-segment display recieved by the serial. Go to `File > Examples > sevenSegment > Serial_Input`.
 
 # Updates
-Updates can be done through the Arduino Library Manager, or by downloading the latest package from [releases page](https://github.com/Blake-Tourneur/sevenSegment/releases).
+Updates can be done through the Arduino Library Manager, or by downloading the latest package from [releases page](https://github.com/BlaT2512/sevenSegment/releases).
 #### Future update list (current version 2.5.0):
 2.6.0 - Add fun/example function to do things such as scroll through every number, letter or character, scroll through segments clockwise/counterclockwise and more
 
