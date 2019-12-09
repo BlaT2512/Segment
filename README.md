@@ -1,5 +1,5 @@
 # sevenSegment Library
-<img src="extras/Logo.png" alt="sevenSegment Logo" width="600"/>
+![sevenSegment Logo](/extras/Logo.png)
 
 Welcome to the sevenSegment library! This is an Arduino library for seven-segment displays, wired up to the arduino using 7 wires (sega - segg), with a decimal point (sega - dp) or with a shift register (clock, latch and data).
 
@@ -13,19 +13,19 @@ To install sevenSegment, install it using the Arduino library manager, or manual
 You can either declare the library for use with straight wiring, straight wiring with a decimal point or with a shift register. You also specify whether you have a common cathode (one ground pin on the display and a positive pin for all the segments) or a common anode display (one positive pin on the display and a ground pin for all the segments). True is common cathode and False is common anode.
 
 STRAIGHT WIRING:
-```
+```C++
 #include <sevenSegment.h>   // Include the sevenSegment library
 sevenSegment sevseg(5, 6, 7, 8, 9, 10, 11, true);   // Set the pins you want and whether the display is common anode/cathode
 //        Segments: a, b, c, d, e, f,  g,  c a/c
 ```
 STRAIGHT WIRING WITH DECIMAL POINT:
-```
+```C++
 #include <sevenSegment.h>   // Include the sevenSegment library
 sevenSegment sevseg(5, 6, 7, 8, 9, 10, 11, 12, true);   // Set the pins you want and whether the display is common anode/cathode
 //        Segments: a, b, c, d, e, f,  g,  dp, c a/c
 ```
 SHIFT REGISTER WIRING:
-```
+```C++
 #include <sevenSegment.h>   // Include the sevenSegment library
 sevenSegment sevseg(5, 6, 7, true);   // Set the pins you want and whether the display is common anode/cathode
 //            Pins: D, C, L, c a/c
@@ -37,7 +37,7 @@ You can currently print to your seven segment display most possible English alph
 The format of the function is `sevseg.display(char charac)`.
 
 Here are some examples of printing single characters:
-```
+```C++
   sevseg.display('A'); // Display letter A
   sevseg.display('5'); // Display number 5
   sevseg.display(';'); // Display character ;
@@ -50,7 +50,7 @@ You can also print a string to the display(s), and it will print all the charact
 The format of the function is `sevseg.displayString(String word, int displays = 1, bool cleardisp = true)`
 
 Here are some examples of printing strings:
-```
+```C++
   sevseg.displayString("Hello"); // Display Hello on 1 display, and clear the display beforehand
   sevseg.displayString("Good bye", 4); // Display Good bye on 4 displays, and clear the displays beforehand
   sevseg.displayString("OK", 3, false); // Display OK on 3 displays, and don't clear the displays beforehand (since there are three displays, the 3rd one will have a letter from the previous display on it as it isn't cleared)
