@@ -1,4 +1,6 @@
 # sevenSegment Library
+<img src="extras/Logo.png" alt="sevenSegment Logo" width="600"/>
+
 Welcome to the sevenSegment library! This is an Arduino library for seven-segment displays, wired up to the arduino using 7 wires (sega - segg), with a decimal point (sega - dp) or with a shift register (clock, latch and data).
 
 <img src="extras/SevSeg.png" alt="seven segment display" width="200"/>
