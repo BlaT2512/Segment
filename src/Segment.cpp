@@ -1,15 +1,15 @@
 /*
-   sevenSegment.cpp - Library for using 7 segment displays
-   7 segment display must be wired up to 7 pins on the arduino, or use a shift register
+   Segment.cpp - Library for using 7/14/16 segment displays
+   Display must be wired up to parallel to the Arduino, or using a shift register
    Created by Blake Tourneur, October 2, 2018.
    Released into the public domain
 */
 
 #include "Arduino.h"
-#include "sevenSegment.h"
+#include "Segment.h"
 #include "7seg_matrix.h"
 
-sevenSegment::sevenSegment(int sega, int segb, int segc, int segd, int sege, int segf, int segg, bool cathode){
+Segment::Segment(int sega, int segb, int segc, int segd, int sege, int segf, int segg, bool cathode){
   pinMode(sega, OUTPUT);
   pinMode(segb, OUTPUT);
   pinMode(segc, OUTPUT);
@@ -28,7 +28,7 @@ sevenSegment::sevenSegment(int sega, int segb, int segc, int segd, int sege, int
   _cathode = cathode;
 }
 
-sevenSegment::sevenSegment(int sega, int segb, int segc, int segd, int sege, int segf, int segg, int segdp, bool cathode){
+Segment::Segment(int sega, int segb, int segc, int segd, int sege, int segf, int segg, int segdp, bool cathode){
   pinMode(sega, OUTPUT);
   pinMode(segb, OUTPUT);
   pinMode(segc, OUTPUT);
@@ -49,7 +49,7 @@ sevenSegment::sevenSegment(int sega, int segb, int segc, int segd, int sege, int
   _cathode = cathode;
 }
 
-sevenSegment::sevenSegment(int Data, int Clock, int Latch, bool cathode){
+Segment::Segment(int Data, int Clock, int Latch, bool cathode){
   pinMode(Data, OUTPUT);
   pinMode(Clock, OUTPUT);
   pinMode(Latch, OUTPUT);
@@ -60,19 +60,19 @@ sevenSegment::sevenSegment(int Data, int Clock, int Latch, bool cathode){
   _cathode = cathode;
 }
 
-void sevenSegment::_Clocking(){
+void Segment::_Clocking(){
   digitalWrite(_Clock,1);
   delay(1);
   digitalWrite(_Clock,0);
 }
 
-void sevenSegment::_Latching(){
+void Segment::_Latching(){
   digitalWrite(_Latch,1);
   delay(1);
   digitalWrite(_Latch,0);
 }
 
-void sevenSegment::_Write(int _Numeral){
+void Segment::_Write(int _Numeral){
   if (_segMode == 3 && _cathode) {
     for (_bitNum = 0;_bitNum < 8;_bitNum++){
       digitalWrite(_Data,pgm_read_word_near(_numMatrix[_Numeral] + _bitNum));
@@ -127,7 +127,7 @@ void sevenSegment::_Write(int _Numeral){
   }
 }
 
-void sevenSegment::display(char charac){
+void Segment::display(char charac){
   _char = charac;
   if (_char == '0') _Write(0);
   else if (_char == '1') _Write(1);
@@ -193,7 +193,7 @@ void sevenSegment::display(char charac){
   else if (_char == '.' && _segMode > 1) _Write(61); // Your display has to have a decimal point to display this character
 }
 
-void sevenSegment::clear(int displays){
+void Segment::clear(int displays){
   _displays = displays;
   for (int i = 1; i <= _displays; i++) {
     display(' ');
@@ -202,7 +202,7 @@ void sevenSegment::clear(int displays){
   delay(100);
 }
 
-void sevenSegment::displayString(String word, int displays, bool cleardisp){
+void Segment::displayString(String word, int displays, bool cleardisp){
   _displays = displays;
   _word = word;
   _cleardisp = cleardisp;
