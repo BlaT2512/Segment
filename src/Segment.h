@@ -1,21 +1,21 @@
 /*
-   sevenSegment.h - Library for using 7 segment displays
-   7 segment display must be wired up to 7 pins on the arduino, or use a shift register
+   Segment.h - Library for using 7/14/16 segment displays
+   Display must be wired up to parallel to the Arduino, or using a shift register
    Created by Blake Tourneur, October 2, 2018.
    Released into the public domain
 */
 
-#ifndef sevenSegment_h
-#define sevenSegment_h
+#ifndef Segment_h
+#define Segment_h
 
 #include "Arduino.h"
 
-class sevenSegment
+class Segment
 {
   public:
-    sevenSegment(int sega, int segb, int segc, int segd, int sege, int segf, int segg, bool cathode = true);
-    sevenSegment(int sega, int segb, int segc, int segd, int sege, int segf, int segg, int segdp, bool cathode = true);
-    sevenSegment(int Data, int Clock, int Latch, bool cathode = true);
+    Segment(int sega, int segb, int segc, int segd, int sege, int segf, int segg, bool cathode = true);
+    Segment(int sega, int segb, int segc, int segd, int sege, int segf, int segg, int segdp, bool cathode = true);
+    Segment(int Data, int Clock, int Latch, bool cathode = true);
     void display(char charac);
     void clear(int displays = 1);
     void displayString(String word, int displays = 1, bool cleardisp = true);

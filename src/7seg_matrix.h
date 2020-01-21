@@ -1,4 +1,9 @@
-const int sevenSegment::_numMatrix[62][8] PROGMEM {
+/*
+ * Seven-Segment display matrix of bits to write numbers, characters and letters to shift-register/parallel displays
+ * Also includes bits required for special functions/examples
+ * Used by Segment.h and Segment.cpp
+*/
+const int Segment::_numMatrix[62][8] PROGMEM {
      //segments
      //g,f,e,d,c,b,a,dp
       {0,1,1,1,1,1,1,0}, //ZERO

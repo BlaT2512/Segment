@@ -6,7 +6,7 @@
 # Datatypes (KEYWORD1)
 #######################################
 
-sevenSegment	KEYWORD1
+Segment	KEYWORD1
 
 #######################################
 # Methods and Functions (KEYWORD2)
