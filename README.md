@@ -70,9 +70,7 @@ The examples available for this library are:
 
 # Updates
 Updates can be done through the Arduino Library Manager, or by downloading the latest package from [releases page](https://github.com/BlaT2512/Segment/releases).
-#### Future update list (current version 2.5.1):
-2.6.0 - Add fun/example function to do things such as scroll through every number, letter or character, scroll through segments clockwise/counterclockwise, tetris display of characters, and more
-
+#### Future update list (current version 2.6.0):
 2.7.0 - Conditional Compilation! - Configure library to only compile functions/matrixes that are used to Arduino (this saves space with the large matrixes for the 16seg display, 14seg display and 7seg display)
 
 3.0.0 - Add support for 16-segment displays
