@@ -202,6 +202,256 @@ void Segment::clear(int displays){
   delay(100);
 }
 
+void Segment::example(int mode, int delayTime, int semiMode){
+  _mode = mode;
+  _delayTime = delayTime;
+  _semiMode = semiMode;
+  // See Segment.h lines 23-36 for what the different modes are
+  if (_mode == 1){
+    if (_semiMode == 1){
+      for (int i = 0; i <= 9; i++) { // NUMBERS
+        _Write(i);
+        delay(_delayTime);
+      }
+    }
+    else if (_semiMode == 2){
+      for (char i = 'A'; i <= 'Z'; i++) { // ALPHABET
+        display(i);
+        delay(_delayTime);
+      }
+    }
+    else if (_semiMode == 3){
+      for (int i = 0; i <= 9; i++) { // NUMBERS
+        _Write(i);
+        delay(_delayTime);
+      }
+      for (char i = 'A'; i <= 'Z'; i++) { // ALPHABET
+        display(i);
+        delay(_delayTime);
+      }
+    }
+    else if (_semiMode == 4){
+      for (int i = 0; i <= 9; i++) { // NUMBERS
+        _Write(i);
+        delay(_delayTime);
+      }
+      for (int i = 36; i <= 59; i++) { // PUNCTUATION - ! and . are not displayed incase display does not have a decimal point
+        _Write(i);
+        delay(_delayTime);
+      }
+    }
+    else if (_semiMode == 5){
+      for (char i = 'A'; i <= 'Z'; i++) { // ALPHABET
+        display(i);
+        delay(_delayTime);
+      }
+      for (int i = 36; i <= 59; i++) { // PUNCTUATION
+        _Write(i);
+        delay(_delayTime);
+      }
+    }
+    else if (_semiMode == 6){
+      for (int i = 0; i <= 9; i++) { // NUMBERS
+        _Write(i);
+        delay(_delayTime);
+      }
+      for (char i = 'A'; i <= 'Z'; i++) { // ALPHABET
+        display(i);
+        delay(_delayTime);
+      }
+      for (int i = 36; i <= 59; i++) { // PUNCTUATION
+        _Write(i);
+        delay(_delayTime);
+      }
+    }
+  }
+
+  else if (_mode == -1){
+    if (_semiMode == 1){
+      for (int i = 9; i >= 0; i--) { // NUMBERS
+        _Write(i);
+        delay(_delayTime);
+      }
+    }
+    else if (_semiMode == 2){
+      for (char i = 'Z'; i >= 'A'; i--) { // ALPHABET
+        display(i);
+        delay(_delayTime);
+      }
+    }
+    else if (_semiMode == 3){
+      for (int i = 9; i >= 0; i--) { // NUMBERS
+        _Write(i);
+        delay(_delayTime);
+      }
+      for (char i = 'Z'; i >= 'A'; i--) { // ALPHABET
+        display(i);
+        delay(_delayTime);
+      }
+    }
+    else if (_semiMode == 4){
+      for (int i = 9; i >= 0; i--) { // NUMBERS
+        _Write(i);
+        delay(_delayTime);
+      }
+      for (int i = 59; i >= 36; i--) { // PUNCTUATION
+        _Write(i);
+        delay(_delayTime);
+      }
+    }
+    else if (_semiMode == 5){
+      for (char i = 'Z'; i >= 'A'; i--) { // ALPHABET
+        display(i);
+        delay(_delayTime);
+      }
+      for (int i = 59; i >= 36; i--) { // PUNCTUATION
+        _Write(i);
+        delay(_delayTime);
+      }
+    }
+    else if (_semiMode == 6){
+      for (int i = 9; i >= 0; i--) { // NUMBERS
+        _Write(i);
+        delay(_delayTime);
+      }
+      for (char i = 'Z'; i >= 'A'; i--) { // ALPHABET
+        display(i);
+        delay(_delayTime);
+      }
+      for (int i = 59; i >= 36; i--) { // PUNCTUATION
+        _Write(i);
+        delay(_delayTime);
+      }
+    }
+  }
+
+  else if (_mode == 2){
+    for (int i = 62; i <= 67; i++) {
+      _Write(i);
+      delay(_delayTime);
+    }
+    _Write(62);
+    delay(_delayTime);
+  }
+
+  else if (_mode == -2){
+    _Write(62);
+    delay(_delayTime);
+    for (int i = 67; i >= 62; i--) {
+      _Write(i);
+      delay(_delayTime);
+    }
+  }
+
+  else if (_mode == 3){
+    for (int i = 71; i <= 76; i++) {
+      _Write(i);
+      delay(_delayTime);
+    }
+    _Write(71);
+    delay(_delayTime);
+  }
+
+  else if (_mode == -3){
+    _Write(71);
+    delay(_delayTime);
+    for (int i = 76; i >= 71; i--) {
+      _Write(i);
+      delay(_delayTime);
+    }
+  }
+
+  else if (_mode == 4){
+    _Write(65);
+    delay(_delayTime);
+    _Write(69);
+    delay(_delayTime);
+    _Write(68);
+    delay(_delayTime);
+    _Write(70);
+    delay(_delayTime);
+    _Write(62);
+    delay(_delayTime);
+  }
+
+  else if (_mode == -4){
+    _Write(62);
+    delay(_delayTime);
+    _Write(70);
+    delay(_delayTime);
+    _Write(68);
+    delay(_delayTime);
+    _Write(69);
+    delay(_delayTime);
+    _Write(65);
+    delay(_delayTime);
+  }
+
+  else if (_mode == 5){
+    _Write(62);
+    delay(_delayTime);
+    _Write(63);
+    delay(_delayTime);
+    _Write(68);
+    delay(_delayTime);
+    _Write(66);
+    delay(_delayTime);
+    _Write(65);
+    delay(_delayTime);
+    _Write(64);
+    delay(_delayTime);
+    _Write(68);
+    delay(_delayTime);
+    _Write(67);
+    delay(_delayTime);
+    _Write(62);
+    delay(_delayTime);
+  }
+
+  else if (_mode == -5){
+    _Write(62);
+    delay(_delayTime);
+    _Write(67);
+    delay(_delayTime);
+    _Write(68);
+    delay(_delayTime);
+    _Write(64);
+    delay(_delayTime);
+    _Write(65);
+    delay(_delayTime);
+    _Write(66);
+    delay(_delayTime);
+    _Write(68);
+    delay(_delayTime);
+    _Write(63);
+    delay(_delayTime);
+    _Write(62);
+    delay(_delayTime);
+  }
+
+  else if (_mode == 6){
+    clear();
+    delay(_delayTime);
+    _Write(62);
+    delay(_delayTime);
+    for (int i = 78; i <= 83; i++) {
+      _Write(i);
+      delay(_delayTime);
+    }
+  }
+
+  else if (_mode == -6){
+    for (int i = 83; i >= 78; i--) {
+      _Write(i);
+      delay(_delayTime);
+    }
+    _Write(62);
+    delay(_delayTime);
+    clear();
+    delay(_delayTime);
+  }
+}
+
 void Segment::displayString(String word, int displays, bool cleardisp){
   _displays = displays;
   _word = word;

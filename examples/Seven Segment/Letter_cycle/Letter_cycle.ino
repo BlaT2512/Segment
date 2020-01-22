@@ -11,8 +11,7 @@ int delayTime = 1000;   // Milliseconds to delay after each number (default 1 se
 int displays = 4;  // Number of seven segment displays you have daisy-chained (default 1)
 
 void setup() {
-  // Nothing needs to go here apart from clearing the displays, the library sets up the pins for you
-  sevseg.clear(displays);
+  sevseg.clear(displays); // Clear the number of displays you have
 }
 
 void loop() {

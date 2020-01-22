@@ -19,6 +19,21 @@ class Segment
     void display(char charac);
     void clear(int displays = 1);
     void displayString(String word, int displays = 1, bool cleardisp = true);
+    void example(int mode, int delayTime, int semiMode = 0);
+    // NOTE: Putting a negative sign before the mode reverses it. eg. mode -1 and semimode 1 scrolls from 9 to 0
+    // The modes for the example function are:
+    // 1 - Scroll through characters. Semimodes are:
+    //     1 - Just numbers
+    //     2 - Just letters
+    //     3 - Numbers & letters
+    //     4 - Numbers & punctuation
+    //     5 - Letters & punctuation
+    //     6 - Numbers, letters and punctuation (everything)
+    // 2 - Animate 1 segment around the display (default clockwise unless negative sign is used)
+    // 3 - Animate 1 blank segment around the lit up display (default clockwise unless negative sign is used)
+    // 4 - Animate move upwards (negative numbers makes animate move downwards)
+    // 5 - Animate in an 8 fashion (negative number changes direction)
+    // 6 - Animate all segments on (a,b,c,d,e,f,g order) (negative number makes it animate all segments off)
   private:
     void _Clocking();
     void _Latching();
@@ -53,7 +68,10 @@ class Segment
     // 9 - 16 segment shift register display (16-bit shift register so you can't use a decimal point unless it is wired up straight to the arduino board)
     // 10 - Dot matrix display
     bool _cathode;
-    static const int _numMatrix[62][8] PROGMEM;
+    int _mode;
+    int _semiMode;
+    int _delayTime;
+    static const int _numMatrix[86][8] PROGMEM;
 };
 
 #endif

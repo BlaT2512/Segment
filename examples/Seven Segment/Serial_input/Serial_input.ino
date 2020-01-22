@@ -12,6 +12,7 @@ int displays = 4; // Change this to the numbers of 7seg-displays you are using (
 
 void setup() {
   Serial.begin(9600); // Begin the serial at 9600 baud
+  sevseg.clear(displays); // Clear the number of displays you have
 }
 
 void loop() {
