@@ -1,4 +1,9 @@
 # Segment Library
+[![GitHub release](https://img.shields.io/github/release/BlaT2512/Segment.svg)](https://GitHub.com/BlaT2512/Segment/releases/)
+[![GitHub license](https://img.shields.io/github/license/BlaT2512/Segment.svg)](https://github.com/BlaT2512/Segment/blob/master/LICENSE)
+[![GitHub issues](https://img.shields.io/github/issues/BlaT2512/Segment.svg)](https://GitHub.com/BlaT2512/Segment/issues/)
+[![GitHub stars](https://img.shields.io/github/stars/BlaT2512/Segment.svg?style=social&label=Star&maxAge=2592000)](https://GitHub.com/BlaT2512/Segment/stargazers/)
+
 <img src="extras/Logo.png" alt="Segment Logo" width="500"/>
 
 Welcome to the Segment library! This is an Arduino library for 7/14/16 displays, wired up to the arduino using 7 wires (sega - segg), with a decimal point (sega - dp) or with a shift register (clock, latch and data).
