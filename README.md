@@ -82,7 +82,7 @@ The modes for the example function are:
 ```
 The example `Examples.ino` demonstrates all of these functions. See below.
 
-### Examples
+## Examples
 The examples available for this library are:
 
 `Number_Cycle.ino` - Cycles through the numbers 0-9 and then blank. Go to `File > Examples > Segment > Seven Segment > Number_Cycle`.
