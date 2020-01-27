@@ -36,7 +36,7 @@ Segment sevseg(5, 6, 7, true);   // Set the pins you want and whether the displa
 //       Pins: D, C, L, c a/c
 ```
 
-#### SUPPORT FOR 16-segment and 14-segment DISPLAYS IS COMING SOON!
+#### SUPPORT FOR 16-segment, 14-segment and Virtual ASCII Art (Serial) DISPLAYS IS COMING SOON!
 
 ## Commands
 ### Printing characters
