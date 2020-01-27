@@ -104,9 +104,11 @@ Updates can be done through the Arduino Library Manager, or by downloading the l
 3.0.0 - Add support for 16-segment displays
 ![Update progress](https://img.shields.io/badge/status-in%20progress-yellow)
 
-3.1.0 - Add support for 14-segment displays
+3.1.0 - Add support for virtual ASCII art (Serial) displays
 
-3.2.0 - Add support for dot matrix displays
+3.2.0 - Add support for 14-segment displays
+
+3.3.0 - Add support for dot matrix displays
 ### Possible updates
 Add support for BCD (binary coded decimal) decoder wired displays
 
