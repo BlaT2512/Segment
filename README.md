@@ -105,6 +105,9 @@ Updates can be done through the Arduino Library Manager, or by downloading the l
 ![Update progress](https://img.shields.io/badge/status-in%20progress-yellow)
 
 3.1.0 - Add support for virtual ASCII art (Serial) displays
+Here is a demonstration of the virtual ASCII 16-segment display that will be added:
+
+<img src="extras/Virtual Segment.gif" alt="Virtual ASCII Display" width="400"/>
 
 3.2.0 - Add support for 14-segment displays
 
