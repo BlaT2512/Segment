@@ -102,7 +102,7 @@ The examples available for this library are:
 Updates can be done through the Arduino Library Manager, or by downloading the latest package from [releases page](https://github.com/BlaT2512/Segment/releases).
 ### Future update list (current version 2.6.0):
 3.0.0 - Add support for 16-segment displays
-![Update progress](https://img.shields.io/badge/status-in%20progress-yellow)
+![Update progress](https://img.shields.io/badge/status-testing-orange)
 
 3.1.0 - Add support for virtual ASCII art (Serial) displays
 Here is a demonstration of the virtual ASCII 16-segment display that will be added:
