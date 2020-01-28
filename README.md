@@ -109,9 +109,11 @@ Here is a demonstration of the virtual ASCII 16-segment display that will be add
 
 <img src="extras/Virtual Segment.gif" alt="Virtual ASCII Display" width="400"/>
 
-3.2.0 - Add support for 14-segment displays
+3.2.0 - Add support for multiple instances of library to work, so you can use different wired displays (you can currently only use multiple displays if they are daisy chained)
 
-3.3.0 - Add support for dot matrix displays
+3.3.0 - Add support for 14-segment displays
+
+3.4.0 - Add support for dot matrix displays
 ### Possible updates
 Add support for BCD (binary coded decimal) decoder wired displays
 
