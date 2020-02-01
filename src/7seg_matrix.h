@@ -3,7 +3,7 @@
  * Also includes bits required for special functions/examples
  * Used by Segment.h and Segment.cpp
 */
-const int Segment::_numMatrix[86][8] PROGMEM {
+const int Segment::_numMatrix[84][8] PROGMEM {
      //segments
      //g,f,e,d,c,b,a,dp
       // NUMBERS
@@ -93,5 +93,5 @@ const int Segment::_numMatrix[86][8] PROGMEM {
       {0,0,0,1,1,1,1,0}, //SEGMENT A+B+C+D
       {0,0,1,1,1,1,1,0}, //SEGMENT A+B+C+D+E
       {0,1,1,1,1,1,1,0}, //SEGMENT A+B+C+D+E+F
-      {1,1,1,1,1,1,1,0}, //SEGMENT A+B+C+D+E+F+G
+      {1,1,1,1,1,1,1,0}  //SEGMENT A+B+C+D+E+F+G
 };

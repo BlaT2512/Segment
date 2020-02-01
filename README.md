@@ -15,32 +15,97 @@ To install Segment, install it using the Arduino library manager, or manually fr
 
 # Using the library / syntax
 ## Declare the library
-You can either declare the library for use with straight wiring, straight wiring with a decimal point or with a shift register. You also specify whether you have a common cathode (one ground pin on the display and a positive pin for all the segments) or a common anode display (one positive pin on the display and a ground pin for all the segments). True is common cathode and False is common anode.
+You can either declare the library for use with straight wiring, straight wiring with a decimal point or with a shift register. You also specify whether you have a common cathode (one ground pin on the display and a positive pin for all the segments) or a common anode display (one positive pin on the display and a ground pin for all the segments). `True` is common cathode and `False` is common anode.
+
+### Seven Segment Display
+<img src="extras/7 Segment.png" alt="Segment Logo" width="100"/>
 
 STRAIGHT WIRING:
 ```C++
 #include <Segment.h>   // Include the Segment library
-Segment sevseg(5, 6, 7, 8, 9, 10, 11, true);   // Set the pins you want and whether the display is common anode/cathode
 //   Segments: a, b, c, d, e, f,  g,  c a/c
+Segment sevseg(5, 6, 7, 8, 9, 10, 11, true);   // Set the pins you want and whether the display is common anode/cathode
 ```
 STRAIGHT WIRING WITH DECIMAL POINT:
 ```C++
 #include <Segment.h>   // Include the Segment library
-Segment sevseg(5, 6, 7, 8, 9, 10, 11, 12, true);   // Set the pins you want and whether the display is common anode/cathode
 //   Segments: a, b, c, d, e, f,  g,  dp, c a/c
+Segment sevseg(5, 6, 7, 8, 9, 10, 11, 12, true);   // Set the pins you want and whether the display is common anode/cathode
 ```
-SHIFT REGISTER WIRING:
+SHIFT REGISTER WIRING (decimal point or not):
 ```C++
 #include <Segment.h>   // Include the Segment library
-Segment sevseg(5, 6, 7, true);   // Set the pins you want and whether the display is common anode/cathode
-//       Pins: D, C, L, c a/c
+//       Pins: D, C, L,   , S, c a/c       D = Data, C = Clock, L = Latch, S = Number of Segments (7), c a/c = Common anode/cathode display
+Segment sevseg(5, 6, 7, -1, 7, true);   // Set the pins you want, number of segments (7) and whether the display is common anode/cathode
 ```
 
-#### SUPPORT FOR 16-segment, 14-segment and Virtual ASCII Art (Serial) DISPLAYS IS COMING SOON!
+
+An 8-bit shift register should be used. Output 1 of shift register should be decimal point if there is one, or not wired if there is not a decimal point. Output 2 should be segment a, output 3 should be segment b etc. all the way to output 8 > segment g.
+
+```
+  +-------------+ 1   ==========  dp +-------------+
++ |             | 2   ==========   a |  +-------+  |
+C |    8-bit    | 3   ==========   b |  |       |  |
+D |    shift    | 4   ==========   c |  +-------+  |
+L |   register  | 5   ==========   d |  |       |  |
+- |             | 6   ==========   e |  +-------+  |
+  |             | 7   ==========   f |  7 Segment  |
+  +-------------+ 8   ==========   g +-------------+
+```
+
+### Sixteen Segment Display
+<img src="extras/16 Segment.png" alt="Segment Logo" width="150"/>
+
+STRAIGHT WIRING:
+```C++
+#include <Segment.h>   // Include the Segment library
+//    Segments: a1, a2, b, c, d1, d2, e, f, g1, g2,  h,  i,  j,  k,  l,  m, c a/c
+Segment sixtseg(2,  3,  4, 5, 6,  7,  8, 9, 10, 11, 12, 13, 14, 15, 16, 17, true);   // Set the pins you want and whether the display is common anode/cathode
+```
+STRAIGHT WIRING WITH DECIMAL POINT:
+```C++
+#include <Segment.h>   // Include the Segment library
+//    Segments: a1, a2, b, c, d1, d2, e, f, g1, g2,  h,  i,  j,  k,  l,  m, c a/c
+Segment sixtseg(2,  3,  4, 5, 6,  7,  8, 9, 10, 11, 12, 13, 14, 15, 16, 17, true);   // Set the pins you want and whether the display is common anode/cathode
+```
+SHIFT REGISTER WIRING (no decimal point as shift register is 16-bit):
+```C++
+#include <Segment.h>   // Include the Segment library
+//        Pins: D, C, L, dp, S, c a/c       D = Data, C = Clock, L = Latch, dp = Seperate decimal point pin (optional, otherwise leave blank), S = Number of Segments (16), c a/c = Common anode/cathode display
+Segment sixtseg(5, 6, 16, 8, 7, true);   // Set the pins you want, number of segments (16)  and whether the display is common anode/cathode
+```
+
+
+Since the shift register is 16-bit (or 2 8-bit registers), and there are 16 segments on the display all needing an output, there is no support for a decimal point (it would be unnecessary to have another shift-register just for a decimal point).
+
+You should use a 16-bit shift register or 2 daisy-chained 8-bit shift registers. Output 1 of shift register should be wired to segment a, and output 2 should be wired to segment b etc. all the way to output 16 > segment m.
+
+```
+ Seperate Arduino Pin  ==========  dp +-------------+
+  +--------------+ 1   ==========  a1 |             |
+  |              | 2   ==========  a2 |             |
+  |              | 3   ==========   b |             |
+  |              | 4   ==========   c |  +-------+  |
+  |              | 5   ==========  d1 |  |\  |  /|  |
++ |              | 6   ==========  d2 |  | \ | / |  |
+C |    16-bit    | 7   ==========   e |  |  \|/  |  |
+D |    shift     | 8   ==========   f |  +-------+  |
+L |   register   | 9   ==========  g1 |  |  /|\  |  |
+- |              | 10  ==========  g2 |  | / | \ |  |
+  |              | 11  ==========   h |  |/  |  \|  |
+  |              | 12  ==========   i |  +-------+  |
+  |              | 13  ==========   j | 16 Segment  |
+  |              | 14  ==========   k |             |
+  |              | 15  ==========   l |             |
+  +--------------+ 16  ==========   m +-------------+
+```
+
+#### SUPPORT FOR 14-segment and Virtual ASCII Art (Serial) DISPLAYS IS COMING SOON!
 
 ## Commands
 ### Printing characters
-You can currently print to your seven segment display most possible English alphanumeric characters and symbols. It is possible to print: Numbers 0-9, Letters A-Z and Characters "#$%&'()*+,-~/\`:;<=>?[]{}.\\^_!
+#### NOTE: When using a 16-segment display, replace sevseg with sixtseg or a different name so it makes it more obvious you are using a 16-segment display (the name of the instance doesn't actually matter)
+You can currently print to your segment display most possible English alphanumeric characters and symbols. It is possible to print: Numbers 0-9, Letters A-Z and Characters "#$%&'()*+,-~/\`:;<=>?[]{}.\\^_!
 
 The format of the function is `sevseg.display(char charac)`.
 
@@ -85,26 +150,25 @@ The modes for the example function are:
 5 - Animate in an 8 fashion (negative number changes direction)
 6 - Animate all segments on (a,b,c,d,e,f,g order) (negative number makes it animate all segments off)
 ```
-The example `Examples.ino` demonstrates all of these functions. See below.
+The example `Fun_features.ino` demonstrates all of these functions. See below.
 
 ## Examples
 The examples available for this library are:
 
-`Number_Cycle.ino` - Cycles through the numbers 0-9 and then blank. Go to `File > Examples > Segment > Seven Segment > Number_Cycle`.
+`Number_cycle.ino` - Cycles through the numbers 0-9 and then blank. Go to `File > Examples > Segment > [Display type] > Number_cycle`.
 
-`Letter_Cycle.ino` - Cycles through the letters A-Z and then blank. Demonstrates use of 'for' loop. Go to `File > Examples > Segment > Seven Segment > Letter_Cycle`.
+`Letter_cycle.ino` - Cycles through the letters A-Z and then blank. Demonstrates use of 'for' loop. Go to `File > Examples > Segment > [Display type] > Letter_cycle`.
 
-`Serial_Input.ino` - Prints the character/string on the display as recieved by Serial. Go to `File > Examples > Segment > Seven Segment > Serial_Input`.
+`Serial_input.ino` - Prints the character/string on the display as recieved by Serial. Go to `File > Examples > Segment > [Display type] > Serial_input`.
 
-`Examples.ino` - Demonstrates all of the functions available with the 'example' function. Go to `File > Examples > Segment > Seven Segment > Examples`.
+`Fun_features.ino` - Demonstrates all of the functions available with the 'example' function. Go to `File > Examples > Segment > [Display type] > Fun_features`.
 
 # Updates
 Updates can be done through the Arduino Library Manager, or by downloading the latest package from [releases page](https://github.com/BlaT2512/Segment/releases).
-### Future update list (current version 2.6.0):
-3.0.0 - Add support for 16-segment displays
-![Update progress](https://img.shields.io/badge/status-testing-orange)
+### Future update list (current version 3.0.0):
+3.1.0 - Add support for virtual ASCII art (Serial) display v1.0
+![Update progress](https://img.shields.io/badge/status-started-orange)
 
-3.1.0 - Add support for virtual ASCII art (Serial) displays
 Here is a demonstration of the virtual ASCII 16-segment display that will be added:
 
 <img src="extras/Virtual Segment.gif" alt="Virtual ASCII Display" width="400"/>

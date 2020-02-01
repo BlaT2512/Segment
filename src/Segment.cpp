@@ -8,8 +8,9 @@
 #include "Arduino.h"
 #include "Segment.h"
 #include "7seg_matrix.h"
+#include "16seg_matrix.h"
 
-Segment::Segment(int sega, int segb, int segc, int segd, int sege, int segf, int segg, bool cathode){
+Segment::Segment(int sega, int segb, int segc, int segd, int sege, int segf, int segg, bool cathode){ // 7seg, no dp
   pinMode(sega, OUTPUT);
   pinMode(segb, OUTPUT);
   pinMode(segc, OUTPUT);
@@ -28,7 +29,7 @@ Segment::Segment(int sega, int segb, int segc, int segd, int sege, int segf, int
   _cathode = cathode;
 }
 
-Segment::Segment(int sega, int segb, int segc, int segd, int sege, int segf, int segg, int segdp, bool cathode){
+Segment::Segment(int sega, int segb, int segc, int segd, int sege, int segf, int segg, int segdp, bool cathode){ // 7seg, dp
   pinMode(sega, OUTPUT);
   pinMode(segb, OUTPUT);
   pinMode(segc, OUTPUT);
@@ -49,14 +50,102 @@ Segment::Segment(int sega, int segb, int segc, int segd, int sege, int segf, int
   _cathode = cathode;
 }
 
-Segment::Segment(int Data, int Clock, int Latch, bool cathode){
+Segment::Segment(int sega1, int sega2, int segb, int segc, int segd1, int segd2, int sege, int segf, int segg1, int segg2, int segh, int segi, int segj, int segk, int segl, int segm, bool cathode = true){  // 16seg, no dp
+  pinMode(sega1, OUTPUT);
+  pinMode(sega2, OUTPUT);
+  pinMode(segb, OUTPUT);
+  pinMode(segc, OUTPUT);
+  pinMode(segd1, OUTPUT);
+  pinMode(segd2, OUTPUT);
+  pinMode(sege, OUTPUT);
+  pinMode(segf, OUTPUT);
+  pinMode(segg1, OUTPUT);
+  pinMode(segg2, OUTPUT);
+  pinMode(segh, OUTPUT);
+  pinMode(segi, OUTPUT);
+  pinMode(segj, OUTPUT);
+  pinMode(segk, OUTPUT);
+  pinMode(segl, OUTPUT);
+  pinMode(segm, OUTPUT);
+  _sega1 = sega1;
+  _sega2 = sega2;
+  _segb = segb;
+  _segc = segc;
+  _segd1 = segd1;
+  _segd2 = segd2;
+  _sege = sege;
+  _segf = segf;
+  _segg1 = segg1;
+  _segg2 = segg2;
+  _segh = segh;
+  _segi = segi;
+  _segj = segj;
+  _segk = segk;
+  _segl = segl;
+  _segm = segm;
+  _segMode = 4;
+  _cathode = cathode;
+}
+
+Segment::Segment(int sega1, int sega2, int segb, int segc, int segd1, int segd2, int sege, int segf, int segg1, int segg2, int segh, int segi, int segj, int segk, int segl, int segm, int segdp, bool cathode = true){  // 16seg, dp
+  pinMode(sega1, OUTPUT);
+  pinMode(sega2, OUTPUT);
+  pinMode(segb, OUTPUT);
+  pinMode(segc, OUTPUT);
+  pinMode(segd1, OUTPUT);
+  pinMode(segd2, OUTPUT);
+  pinMode(sege, OUTPUT);
+  pinMode(segf, OUTPUT);
+  pinMode(segg1, OUTPUT);
+  pinMode(segg2, OUTPUT);
+  pinMode(segh, OUTPUT);
+  pinMode(segi, OUTPUT);
+  pinMode(segj, OUTPUT);
+  pinMode(segk, OUTPUT);
+  pinMode(segl, OUTPUT);
+  pinMode(segm, OUTPUT);
+  pinMode(segdp, OUTPUT);
+  _sega1 = sega1;
+  _sega2 = sega2;
+  _segb = segb;
+  _segc = segc;
+  _segd1 = segd1;
+  _segd2 = segd2;
+  _sege = sege;
+  _segf = segf;
+  _segg1 = segg1;
+  _segg2 = segg2;
+  _segh = segh;
+  _segi = segi;
+  _segj = segj;
+  _segk = segk;
+  _segl = segl;
+  _segm = segm;
+  _segdp = segdp;
+  _segMode = 5;
+  _cathode = cathode;
+}
+
+Segment::Segment(int Data, int Clock, int Latch, int segdp, int Segments, bool cathode){ // Shift register display
   pinMode(Data, OUTPUT);
   pinMode(Clock, OUTPUT);
   pinMode(Latch, OUTPUT);
   _Data = Data;
   _Clock = Clock;
   _Latch = Latch;
-  _segMode = 3;
+  if (segdp > -1 && Segments == 16){  // If you are using a seperate decimal point pin for a 16-segment display
+    _segdp = segdp;
+  }
+  else {
+    _segdp = -1;
+  }
+  // Determine the segmode
+  if (Segments == 7){
+    _segMode = 3;
+  }
+  else if (Segments == 16){
+    _segMode = 6;
+  }
   _cathode = cathode;
 }
 
@@ -86,6 +175,38 @@ void Segment::_Write(int _Numeral){
       _Clocking();
     }
     _Latching();
+  }
+  if (_segMode == 6 && _cathode) {
+    for (_bitNum = 0;_bitNum < 16;_bitNum++){
+      digitalWrite(_Data,pgm_read_word_near(_numMatrix[_Numeral] + _bitNum));
+      _Clocking();
+    }
+    _Latching();
+
+    if (_segdp > -1){
+      if (_Numeral == 60 || _Numeral == 61){
+        digitalWrite(_segdp,1); // Decimal point ON
+      }
+      else {
+        digitalWrite(_segdp,0); // Decimal point OFF
+      }
+    }
+  }
+  else if (_segMode == 6 && !_cathode) {
+    for (_bitNum = 0;_bitNum < 16;_bitNum++){
+      digitalWrite(_Data,!pgm_read_word_near(_numMatrix[_Numeral] + _bitNum));
+      _Clocking();
+    }
+    _Latching();
+
+    if (_segdp > -1){
+      if (_Numeral == 60 || _Numeral == 61){
+        digitalWrite(_segdp,0); // Decimal point ON
+      }
+      else {
+        digitalWrite(_segdp,1); // Decimal point OFF
+      }
+    }
   }
   else if (_segMode == 1 && _cathode) {
     digitalWrite(_segg,pgm_read_word_near(_numMatrix[_Numeral] + 0));
@@ -124,6 +245,94 @@ void Segment::_Write(int _Numeral){
     digitalWrite(_segb,!pgm_read_word_near(_numMatrix[_Numeral] + 5));
     digitalWrite(_sega,!pgm_read_word_near(_numMatrix[_Numeral] + 6));
     digitalWrite(_segdp,!pgm_read_word_near(_numMatrix[_Numeral] + 7));
+  }
+  else if (_segMode == 4 && _cathode) {
+    digitalWrite(_segm,pgm_read_word_near(_16numMatrix[_Numeral] + 0));
+    digitalWrite(_segl,pgm_read_word_near(_16numMatrix[_Numeral] + 1));
+    digitalWrite(_segk,pgm_read_word_near(_16numMatrix[_Numeral] + 2));
+    digitalWrite(_segj,pgm_read_word_near(_16numMatrix[_Numeral] + 3));
+    digitalWrite(_segi,pgm_read_word_near(_16numMatrix[_Numeral] + 4));
+    digitalWrite(_segh,pgm_read_word_near(_16numMatrix[_Numeral] + 5));
+    digitalWrite(_segg1,pgm_read_word_near(_16numMatrix[_Numeral] + 6));
+    digitalWrite(_segg1,pgm_read_word_near(_16numMatrix[_Numeral] + 7));
+    digitalWrite(_segf,pgm_read_word_near(_16numMatrix[_Numeral] + 8));
+    digitalWrite(_sege,pgm_read_word_near(_16numMatrix[_Numeral] + 9));
+    digitalWrite(_segd2,pgm_read_word_near(_16numMatrix[_Numeral] + 10));
+    digitalWrite(_segd1,pgm_read_word_near(_16numMatrix[_Numeral] + 11));
+    digitalWrite(_segc,pgm_read_word_near(_16numMatrix[_Numeral] + 12));
+    digitalWrite(_segb,pgm_read_word_near(_16numMatrix[_Numeral] + 13));
+    digitalWrite(_sega2,pgm_read_word_near(_16numMatrix[_Numeral] + 14));
+    digitalWrite(_sega1,pgm_read_word_near(_16numMatrix[_Numeral] + 15));
+  }
+  else if (_segMode == 4 && !_cathode) {
+    digitalWrite(_segm,!pgm_read_word_near(_16numMatrix[_Numeral] + 0));
+    digitalWrite(_segl,!pgm_read_word_near(_16numMatrix[_Numeral] + 1));
+    digitalWrite(_segk,!pgm_read_word_near(_16numMatrix[_Numeral] + 2));
+    digitalWrite(_segj,!pgm_read_word_near(_16numMatrix[_Numeral] + 3));
+    digitalWrite(_segi,!pgm_read_word_near(_16numMatrix[_Numeral] + 4));
+    digitalWrite(_segh,!pgm_read_word_near(_16numMatrix[_Numeral] + 5));
+    digitalWrite(_segg1,!pgm_read_word_near(_16numMatrix[_Numeral] + 6));
+    digitalWrite(_segg1,!pgm_read_word_near(_16numMatrix[_Numeral] + 7));
+    digitalWrite(_segf,!pgm_read_word_near(_16numMatrix[_Numeral] + 8));
+    digitalWrite(_sege,!pgm_read_word_near(_16numMatrix[_Numeral] + 9));
+    digitalWrite(_segd2,!pgm_read_word_near(_16numMatrix[_Numeral] + 10));
+    digitalWrite(_segd1,!pgm_read_word_near(_16numMatrix[_Numeral] + 11));
+    digitalWrite(_segc,!pgm_read_word_near(_16numMatrix[_Numeral] + 12));
+    digitalWrite(_segb,!pgm_read_word_near(_16numMatrix[_Numeral] + 13));
+    digitalWrite(_sega2,!pgm_read_word_near(_16numMatrix[_Numeral] + 14));
+    digitalWrite(_sega1,!pgm_read_word_near(_16numMatrix[_Numeral] + 15));
+  }
+  else if (_segMode == 5 && _cathode) {
+    digitalWrite(_segm,pgm_read_word_near(_16numMatrix[_Numeral] + 0));
+    digitalWrite(_segl,pgm_read_word_near(_16numMatrix[_Numeral] + 1));
+    digitalWrite(_segk,pgm_read_word_near(_16numMatrix[_Numeral] + 2));
+    digitalWrite(_segj,pgm_read_word_near(_16numMatrix[_Numeral] + 3));
+    digitalWrite(_segi,pgm_read_word_near(_16numMatrix[_Numeral] + 4));
+    digitalWrite(_segh,pgm_read_word_near(_16numMatrix[_Numeral] + 5));
+    digitalWrite(_segg1,pgm_read_word_near(_16numMatrix[_Numeral] + 6));
+    digitalWrite(_segg1,pgm_read_word_near(_16numMatrix[_Numeral] + 7));
+    digitalWrite(_segf,pgm_read_word_near(_16numMatrix[_Numeral] + 8));
+    digitalWrite(_sege,pgm_read_word_near(_16numMatrix[_Numeral] + 9));
+    digitalWrite(_segd2,pgm_read_word_near(_16numMatrix[_Numeral] + 10));
+    digitalWrite(_segd1,pgm_read_word_near(_16numMatrix[_Numeral] + 11));
+    digitalWrite(_segc,pgm_read_word_near(_16numMatrix[_Numeral] + 12));
+    digitalWrite(_segb,pgm_read_word_near(_16numMatrix[_Numeral] + 13));
+    digitalWrite(_sega2,pgm_read_word_near(_16numMatrix[_Numeral] + 14));
+    digitalWrite(_sega1,pgm_read_word_near(_16numMatrix[_Numeral] + 15));
+    if (_segdp > -1){
+      if (_Numeral == 60 || _Numeral == 61){
+        digitalWrite(_segdp,1); // Decimal point ON
+      }
+      else {
+        digitalWrite(_segdp,0); // Decimal point OFF
+      }
+    }
+  }
+  else if (_segMode == 5 && !_cathode) {
+    digitalWrite(_segm,!pgm_read_word_near(_16numMatrix[_Numeral] + 0));
+    digitalWrite(_segl,!pgm_read_word_near(_16numMatrix[_Numeral] + 1));
+    digitalWrite(_segk,!pgm_read_word_near(_16numMatrix[_Numeral] + 2));
+    digitalWrite(_segj,!pgm_read_word_near(_16numMatrix[_Numeral] + 3));
+    digitalWrite(_segi,!pgm_read_word_near(_16numMatrix[_Numeral] + 4));
+    digitalWrite(_segh,!pgm_read_word_near(_16numMatrix[_Numeral] + 5));
+    digitalWrite(_segg1,!pgm_read_word_near(_16numMatrix[_Numeral] + 6));
+    digitalWrite(_segg1,!pgm_read_word_near(_16numMatrix[_Numeral] + 7));
+    digitalWrite(_segf,!pgm_read_word_near(_16numMatrix[_Numeral] + 8));
+    digitalWrite(_sege,!pgm_read_word_near(_16numMatrix[_Numeral] + 9));
+    digitalWrite(_segd2,!pgm_read_word_near(_16numMatrix[_Numeral] + 10));
+    digitalWrite(_segd1,!pgm_read_word_near(_16numMatrix[_Numeral] + 11));
+    digitalWrite(_segc,!pgm_read_word_near(_16numMatrix[_Numeral] + 12));
+    digitalWrite(_segb,!pgm_read_word_near(_16numMatrix[_Numeral] + 13));
+    digitalWrite(_sega2,!pgm_read_word_near(_16numMatrix[_Numeral] + 14));
+    digitalWrite(_sega1,!pgm_read_word_near(_16numMatrix[_Numeral] + 15));
+    if (_segdp > -1){
+      if (_Numeral == 60 || _Numeral == 61){
+        digitalWrite(_segdp,0); // Decimal point ON
+      }
+      else {
+        digitalWrite(_segdp,1); // Decimal point OFF
+      }
+    }
   }
 }
 
@@ -189,8 +398,8 @@ void Segment::display(char charac){
   else if (_char == '\\') _Write(57);
   else if (_char == '^') _Write(58);
   else if (_char == '_') _Write(59);
-  else if (_char == '!' && _segMode > 1) _Write(60); // Your display has to have a decimal point to display this character
-  else if (_char == '.' && _segMode > 1) _Write(61); // Your display has to have a decimal point to display this character
+  else if (_char == '!' && _segMode != 1 && _segMode != 4) _Write(60); // Your display has to have a decimal point to display this character
+  else if (_char == '.' && _segMode != 1 && _segMode != 4) _Write(61); // Your display has to have a decimal point to display this character
 }
 
 void Segment::clear(int displays){
@@ -206,7 +415,7 @@ void Segment::example(int mode, int delayTime, int semiMode){
   _mode = mode;
   _delayTime = delayTime;
   _semiMode = semiMode;
-  // See Segment.h lines 23-36 for what the different modes are
+  // See Segment.h lines 83-96 for what the different modes are
   if (_mode == 1){
     if (_semiMode == 1){
       for (int i = 0; i <= 9; i++) { // NUMBERS
